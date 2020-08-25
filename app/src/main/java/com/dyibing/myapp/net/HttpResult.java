@@ -1,0 +1,38 @@
+package com.dyibing.myapp.net;
+
+import java.util.Map;
+
+/**
+ * Created by Alan on 20-7-7
+ */
+
+public class HttpResult<T> {
+
+    private T data;
+    protected String code;
+    protected String msg;
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+}

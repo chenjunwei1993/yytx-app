@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">丫丫超人养成</string>
+
+    <string name="Network_Connection_timeout">网络连接超时</string>
+    <string name="no_network">网络中断，请检查您的网络状态</string>
+    <string name="loading_tip">加载中…</string>
+
+    <!-- HttpCodeException -->
+    <string name="http_code_default">未知错误%1$d</string>
+    <string name="http_code_401">登录失效</string>
+    <string name="http_code_404">资源不存在</string>
+    <string name="http_code_500">服务器错误</string>
+    <string name="http_code_503">服务当前无法处理请求</string>
+    <string name="splash_first">在广袤的森林中，住着小鹿公主丫丫，和她的爸爸妈妈，他们和鹿精灵们开心的在大森林中生活，直到有一天，坏人们砍倒了树木，破坏了家园，小鹿丫丫流离失所</string>
+    <string name="splash_two">在寻找新家园的途中，丫丫在遇到了小伙伴，勇敢的小鸡木木，他们开始了一段不同寻常的探险之旅，收集齐碎片，就能兑换令人惊奇的宝藏</string>
+    <string name="splash_three">小伙伴们，让我们和丫丫，木木一起，踏上这段神奇的旅途吧，去淘金谷攒够金币，摇动骰子，就有机会获得碎片哦，集齐碎片，来兑换宝藏吧！</string>
+    <string name="splash_four">嗨，亲爱的小伙伴，我们又见面咯，连续登录，每天登录可以获得更多奖励</string>
+    <string name="scan_login">让爸爸妈妈扫码.领取限时免费会员，才能继续和丫丫的森林探险哦</string>
+</resources>

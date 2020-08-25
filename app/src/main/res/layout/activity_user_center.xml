@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_bg"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.dyibing.myapp.view.CircleImageView
+            android:id="@+id/nice_iv0"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/default_head"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#05C2BE"
+            android:layout_marginLeft="20dp" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/nice_iv0"
+            android:layout_toEndOf="@+id/nice_iv0"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_16_sp"
+            android:textColor="@color/text_color"
+            android:text="陈俊伟"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_aixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/nice_iv0"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/nice_iv0"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_16_sp"
+            android:drawableStart="@drawable/aixin"
+            android:drawablePadding="5dp"
+            android:text="18"/>
+        <TextView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button3_bg"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_16_sp"
+            android:text="返回"
+            android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="20dp"
+        android:background="#0664C0"
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_16_sp"
+        android:text="填写全部资料并保存，得30 奖励\n有问题请添加客服微信：xxxx"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_project_bg"
+        android:layout_marginEnd="20dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_user_id"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="ID"/>
+
+            <TextView
+                android:id="@+id/tv_user_id_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_user_id"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="昵称"/>
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_user_name"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:textColorHint="@color/hint_text_color"
+                android:hint="限10个字"
+                android:maxLength="10"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_time_birth"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="出生年月"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tv_time_birth"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_et_info_bg">
+
+                <TextView
+                    android:id="@+id/et_time_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_16_sp"
+                    android:text="点击选择"/>
+
+                <ImageView
+                    android:layout_toEndOf="@+id/et_time_birth"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/ic_arrow"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_user_grade"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="年级"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tv_user_grade"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_et_info_bg">
+
+                <TextView
+                    android:id="@+id/et_user_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_16_sp"
+                    android:text="点击选择"/>
+
+                <ImageView
+                    android:layout_toEndOf="@+id/et_user_grade"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/ic_arrow"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="性别"/>
+
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@+id/tv_gender">
+                <RadioButton
+                    android:id="@+id/rb_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/boy"
+                    android:checked="true"/>
+                <RadioButton
+                    android:id="@+id/rb_woman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:drawableEnd="@drawable/girl"/>
+            </RadioGroup>
+
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_gender"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/shape_et_info_bg"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_toEndOf="@+id/tv_gender"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:paddingStart="20dp"-->
+<!--                android:paddingEnd="20dp"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/text_16_sp"-->
+<!--                android:hint="限10个字"/>-->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_like"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="爱好"/>
+
+            <EditText
+                android:id="@+id/et_like"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_like"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:hint="限15个字"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_want_gift"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="最想得到的礼物"/>
+
+            <EditText
+                android:id="@+id/et_want_gift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_want_gift"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:hint="限15个字"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_like_animation"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="喜欢的动画"/>
+
+            <EditText
+                android:id="@+id/et_like_animation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_like_animation"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:hint="限15个字"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_idol"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="偶像"/>
+
+            <EditText
+                android:id="@+id/et_idol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_idol"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:hint="限15个字"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tv_like_game"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:text="喜欢的游戏"/>
+
+            <EditText
+                android:id="@+id/et_like_game"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_info_bg"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/tv_like_game"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp"
+                android:hint="限15个字"/>
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bg_save"/>
+
+
+    </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
