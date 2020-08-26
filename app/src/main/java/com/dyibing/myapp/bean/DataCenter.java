@@ -26,34 +26,9 @@ public class DataCenter {
         return instance;
     }
 
-
-    public void setUser(User user) {
-//        mUser.setDomain(user.getDomain());
-//        mUser.setImgDomain(user.getImgDomain());
-        mUser.setLogin(user.isLogin());
-//        mUser.setUserId(user.getUserId());
-        mUser.setUsername(user.getUsername());
-        mUser.setPassword(user.getPassword());
-//        mUser.setNickname(user.getNickname());
-//        mUser.setBalance(user.getBalance());
-        mUser.setAvatarUrl(user.getAvatarUrl());
-        mUser.setToken(user.getToken());
-    }
-
-    public void clearUser() {
-        mUser.setLogin(false);
-        mUser.setUserId(null);
-        mUser.setUsername("");
-        mUser.setPassword("");
-        mUser.setNickname("");
-        mUser.setAvatarUrl("");
-        mUser.setToken("");
-    }
-
     public User getUser() {
         return mUser;
     }
-
 
     public String getToken() {
         if (TextUtils.isEmpty(mUser.getToken())) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/srl_fresh"
@@ -8,235 +8,46 @@
     android:background="@color/main_bg"
     tools:context=".activity.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        tools:ignore="UselessParent">
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="UselessParent">
-
-                    <com.dyibing.myapp.view.CircleImageView
-                        android:id="@+id/nice_iv0"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:src="@mipmap/default_head"
-                        app:civ_border_color="#05C2BE"
-                        app:civ_border_width="2dp" />
+        <com.dyibing.myapp.view.CircleImageView
+            android:id="@+id/circle_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/default_head"
+            app:civ_border_color="#05C2BE"
+            app:civ_border_width="2dp" />
 
 
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/nice_iv0"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@+id/nice_iv0"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/text_16_sp" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/circle_avatar"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/circle_avatar"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_16_sp" />
 
-                    <TextView
-                        android:id="@+id/tv_aixin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/nice_iv0"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/tv_zan"
-                        android:drawableStart="@mipmap/aixin"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/text_16_sp" />
-                </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_forest_coin_Count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/circle_avatar"
+            android:layout_marginStart="20dp"
+            android:drawableStart="@drawable/aixin"
+            android:drawablePadding="10dp"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_16_sp" />
+    </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#C9695B" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/iv_help_yy"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_button1_bg"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="帮助丫丫"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/iv_check_ta"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_button2_bg"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="查看课表"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_today_task"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/shape_toady_task_bg"
-                        android:paddingStart="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="20dp"
-                        android:paddingBottom="10dp"
-                        android:text="今日任务  "
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/tv_today_task"
-                        android:layout_toEndOf="@+id/tv_today_task"
-                        android:layout_toRightOf="@+id/tv_today_task"
-                        android:src="@mipmap/cao" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/shape_task_list_bg"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_now_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:drawableStart="@mipmap/riqi"
-                        android:drawablePadding="10dp"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/text_16_sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/clv_today_task"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp" />
-
-                    <TextView
-                        android:id="@+id/tv_toady_task_hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="还有已经完成的任务爸爸妈妈还有没有确认哦，快去让ta们在手机上确认吧！"
-                        android:textColor="#C9695B"
-                        android:visibility="gone" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_ys_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_ys_task_bg"
-                    android:paddingStart="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="20dp"
-                    android:paddingBottom="10dp"
-                    android:text="昨日任务  "
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/shape_task_list_bg"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_ys_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:drawableStart="@mipmap/riqi"
-                        android:drawablePadding="10dp"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/text_16_sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/clv_ys_task"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp" />
-
-                    <TextView
-                        android:id="@+id/tv_ys_task_hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="还有已经完成的任务爸爸妈妈还有没有确认哦，快去让ta们在手机上确认吧！"
-                        android:textColor="#C9695B"
-                        android:visibility="gone" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/iv_go_task_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@mipmap/check_tasks" />
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

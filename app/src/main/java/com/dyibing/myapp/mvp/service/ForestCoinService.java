@@ -1,6 +1,5 @@
 package com.dyibing.myapp.mvp.service;
 
-import com.dyibing.myapp.bean.FinishStatusBean;
 import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.net.HttpResult;
 
@@ -20,16 +19,6 @@ public interface ForestCoinService {
     @Headers("Content-Type:application/json")
     @POST("childrenUser/receiveForestCoin")
     Observable<HttpResult> receiveForestCoin(@Body RequestBody body);
-
-
-    /**
-     * 用户前一天的任务是否完成
-     *
-     * @return
-     */
-    @Headers("Content-Type:application/json")
-    @GET("task/getUserFinishTaskStatus")
-    Observable<HttpResult<FinishStatusBean>> getUserFinishTaskStatus();
 
     /**
      * 领取森林币

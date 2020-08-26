@@ -3,23 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/main_bg"
->
+    android:background="@color/main_bg">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <com.dyibing.myapp.view.CircleImageView
-            android:id="@+id/nice_iv0"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/circle_avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="20dp"
@@ -33,8 +30,8 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nice_iv0"
-            android:layout_toEndOf="@+id/nice_iv0"
+            android:layout_alignTop="@+id/circle_avatar"
+            android:layout_toEndOf="@+id/circle_avatar"
             android:layout_marginStart="10dp"
             android:textSize="@dimen/text_16_sp"
             android:textColor="@color/text_color"
@@ -46,9 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_alignBottom="@+id/nice_iv0"
+            android:layout_alignBottom="@+id/circle_avatar"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/nice_iv0"
+            android:layout_toEndOf="@+id/circle_avatar"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_16_sp"
             android:drawableStart="@drawable/aixin"
@@ -190,7 +187,7 @@
                 android:background="@drawable/shape_et_info_bg">
 
                 <TextView
-                    android:id="@+id/et_time_birth"
+                    android:id="@+id/et_birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
@@ -198,7 +195,7 @@
                     android:text="点击选择"/>
 
                 <ImageView
-                    android:layout_toEndOf="@+id/et_time_birth"
+                    android:layout_toEndOf="@+id/et_birthday"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_arrow"

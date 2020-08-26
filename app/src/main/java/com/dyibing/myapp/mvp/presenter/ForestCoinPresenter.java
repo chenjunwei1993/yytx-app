@@ -2,7 +2,6 @@ package com.dyibing.myapp.mvp.presenter;
 
 import android.content.Context;
 
-import com.dyibing.myapp.bean.FinishStatusBean;
 import com.dyibing.myapp.mvp.model.ForestCoinModel;
 import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.mvp.view.IBaseView;
@@ -19,15 +18,6 @@ public class ForestCoinPresenter extends BasePresenter{
     public ForestCoinPresenter(Context mContext, IBaseView view) {
         super(mContext, view);
         mModel = new ForestCoinModel();
-    }
-
-    /**
-     * 获取用户前一天任务完成状态
-     */
-
-    public void getUserFinishTaskStatus() {
-        Subscription subscription = mModel.getUserFinishTaskStatus(new ProgressSubscriber(o -> ((ForestCoinView) mView).onUserFinishTaskStatus((FinishStatusBean) o), mContext));
-        subList.add(subscription);
     }
 
     /**

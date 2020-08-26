@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
 import com.dyibing.myapp.bean.UploadResult;
+import com.dyibing.myapp.bean.User;
 import com.dyibing.myapp.bean.UserInfoBean;
 import com.dyibing.myapp.common.Constant;
 import com.dyibing.myapp.mvp.presenter.UserCenterPresenter;
@@ -59,6 +60,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -68,20 +70,20 @@ import okhttp3.RequestBody;
 
 public class UserCenterActivity extends AppCompatActivity implements UserCenterView, UserInfoView {
 
-    @BindView(R.id.nice_iv0)
-    CircleImageView niceIv0;
+    @BindView(R.id.circle_avatar)
+    CircleImageView circleAvatar;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_zan)
-    TextView tvZan;
     @BindView(R.id.tv_aixin)
     TextView tvAixin;
     @BindView(R.id.iv_back)
     TextView ivBack;
     @BindView(R.id.et_username)
     EditText etUsername;
-    @BindView(R.id.et_time_birth)
-    TextView etTimeBirth;
+    @BindView(R.id.et_birthday)
+    TextView etBirthday;
+    @BindView(R.id.et_user_grade)
+    TextView etUserGrade;
     @BindView(R.id.rb_man)
     RadioButton rbMan;
     @BindView(R.id.rb_woman)
@@ -102,26 +104,16 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     ImageView ivSave;
     @BindView(R.id.tv_user_id_show)
     TextView tvUserIdShow;
-    private int updateType; //0,更新用户信息  1，只更新头像
-    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_SMALL_IMAGE_CUTTING = 2;
     private static final int REQUEST_BIG_IMAGE_CUTTING = 3;
     private static final String IMAGE_FILE_NAME = "icon.jpg";
-    private UserCenterPresenter userCenterPresenter;
-    private String timeBirth;
-    private PhotoPopupWindow mPhotoPopupWindow;
     private String mImageUri;
-    private String newHeadUrl;
-    private String name;
-    private String sex;
-    private String like;
-    private String wantGift;
-    private String likeAnimation;
-    private String idol;
-    private String likeGame;
-    private String headUrl;
+    private UserCenterPresenter userCenterPresenter;
+    private PhotoPopupWindow mPhotoPopupWindow;
     private UserInfoPresenter userInfoPresenter;
 
     @Override
@@ -129,167 +121,116 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_center);
         ButterKnife.bind(this);
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getAvatarUrl())) {
-            Glide.with(this).load(DataCenter.getInstance().getUser().getAvatarUrl()).into(niceIv0);
+        initView();
+        userCenterPresenter = new UserCenterPresenter(this, this);
+        userInfoPresenter = new UserInfoPresenter(this, this);
+    }
+
+    private void initView() {
+        User user = DataCenter.getInstance().getUser();
+        if (!TextUtils.isEmpty(user.getAvatarUrl())) {
+            Glide.with(this).load(user.getAvatarUrl()).into(circleAvatar);
         }
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getNickname())) {
-            tvName.setText(DataCenter.getInstance().getUser().getNickname());
-            etUsername.setText(DataCenter.getInstance().getUser().getNickname());
-        }else {
+        if (!TextUtils.isEmpty(user.getNickname())) {
+            tvName.setText(user.getNickname());
+            etUsername.setText(user.getNickname());
+        } else {
             tvName.setText(DataCenter.getInstance().getUserId());
         }
-        tvZan.setText(DataCenter.getInstance().getUser().getLikesCount() + "");
-        if (DataCenter.getInstance().getUser().getForestCoinCount_ls() != 0)
-            tvAixin.setText(DataCenter.getInstance().getUser().getForestCoinCount() + "+" + DataCenter.getInstance().getUser().getForestCoinCount_ls());
-        else
-            tvAixin.setText(DataCenter.getInstance().getUser().getForestCoinCount()+ "");
+        if (user.getForestCoinCount_ls() != 0) {
+            tvAixin.setText(user.getForestCoinCount() + "+" + user.getForestCoinCount_ls());
+        } else {
+            tvAixin.setText(user.getForestCoinCount() + "");
+        }
         tvUserIdShow.setText(DataCenter.getInstance().getUserId());
-        String strBirthday = DataCenter.getInstance().getUser().getBirthday();
+        String strBirthday = user.getBirthday();
         if (!TextUtils.isEmpty(strBirthday)) {
             if (strBirthday.endsWith("00:00:00")) {
                 strBirthday = strBirthday.replace(" 00:00:00", "");
             }
-            etTimeBirth.setText(strBirthday);
+            etBirthday.setText(strBirthday);
             timeBirth = strBirthday;
         }
-        if ("M".equals(DataCenter.getInstance().getUser().getUserSex()))
+        if ("M".equals(user.getUserSex())) {
             rbMan.setChecked(true);
-        else rbWoman.setChecked(true);
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getUserHobby())) {
-            etLike.setText(DataCenter.getInstance().getUser().getUserHobby());
+        } else {
+            rbWoman.setChecked(true);
         }
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getLikeGift())) {
-            etWantGift.setText(DataCenter.getInstance().getUser().getLikeGift());
+        if (!TextUtils.isEmpty(user.getUserHobby())) {
+            etLike.setText(user.getUserHobby());
         }
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getLikeCartoon())) {
-            etLikeAnimation.setText(DataCenter.getInstance().getUser().getLikeCartoon());
+        if (!TextUtils.isEmpty(user.getLikeGift())) {
+            etWantGift.setText(user.getLikeGift());
         }
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getLikeIdol())) {
-            etIdol.setText(DataCenter.getInstance().getUser().getLikeIdol());
+        if (!TextUtils.isEmpty(user.getLikeCartoon())) {
+            etLikeAnimation.setText(user.getLikeCartoon());
         }
-        if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getLikeGame())) {
-            etLikeGame.setText(DataCenter.getInstance().getUser().getLikeGame());
+        if (!TextUtils.isEmpty(user.getLikeIdol())) {
+            etIdol.setText(user.getLikeIdol());
         }
-
-        userCenterPresenter = new UserCenterPresenter(this, this);
-        userInfoPresenter = new UserInfoPresenter(this,this);
+        if (!TextUtils.isEmpty(user.getLikeGame())) {
+            etLikeGame.setText(user.getLikeGame());
+        }
     }
 
     Gson gson = new Gson();
 
-    @OnClick({R.id.nice_iv0, R.id.iv_back, R.id.et_time_birth, R.id.iv_save})
+    @OnClick({R.id.circle_avatar, R.id.iv_back, R.id.et_birthday, R.id.iv_save})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.et_time_birth:
+            case R.id.et_birthday:
                 //时间选择器
                 TimePickerView pvTime = new TimePickerBuilder(UserCenterActivity.this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         String time = DateUtils.convertToString(DateUtils.DATE_FORMAT, date);
-                        etTimeBirth.setText(time);
-                        timeBirth = time;
+                        etBirthday.setText(time);
                     }
                 }).build();
                 pvTime.show();
                 break;
 
             case R.id.iv_save:
-                name = etUsername.getText().toString().trim();
-                if (TextUtils.isEmpty(name)) {
-                    SingleToast.showMsg("请输入昵称！");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(timeBirth)) {
-                    SingleToast.showMsg("请选择出生日期！");
-                    return;
-                }
-                if (rgGender.getCheckedRadioButtonId() == R.id.rb_man)
-                    sex = "M";
-                else sex = "F";
-                like = etLike.getText().toString().trim();
-                wantGift = etWantGift.getText().toString().trim();
-                likeAnimation = etLikeAnimation.getText().toString().trim();
-                idol = etIdol.getText().toString().trim();
-                likeGame = etLikeGame.getText().toString().trim();
-                headUrl = "";
-                if (!TextUtils.isEmpty(newHeadUrl))
-                    headUrl = newHeadUrl;
-                else if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getAvatarUrl())) {
-                    headUrl = DataCenter.getInstance().getUser().getAvatarUrl();
-                }
-//                String nickName,String birthday,String userSex,String userHobby,
-//                                   String likeGift,
-//                                   String likeCartoon,
-//                                   String likeIdol,
-//                                   String likeGame,
-//                                   String avatarUrl,
-//                                   String parentWxId
-
-                HashMap<String, Object> paramsMap = new HashMap<>();
-                paramsMap.put("nickName", name);
-                paramsMap.put("birthday", timeBirth + " 00:00:00");
-                paramsMap.put("userSex", sex);
-                paramsMap.put("userHobby", like);
-                paramsMap.put("likeGift", wantGift);
-                paramsMap.put("likeCartoon", likeAnimation);
-                paramsMap.put("likeIdol", idol);
-                paramsMap.put("likeGame", likeGame);
-                if (!TextUtils.isEmpty(headUrl))
-                    paramsMap.put("avatarUrl", headUrl);
-                String strEntity = gson.toJson(paramsMap);
-                RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
-                updateType = 0;
-                userCenterPresenter.saveUser(body);
-//                userCenterPresenter.saveUser(name, timeBirth, sex, like, wantGift, likeAnimation, idol, likeGame,
-//                        headUrl,
-//                        DataCenter.getInstance().getUserId()
-//                );
+                
                 break;
-            case R.id.nice_iv0:
-                mPhotoPopupWindow = new PhotoPopupWindow(UserCenterActivity.this, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // 权限申请
-                        if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            //权限还没有授予，需要在这里写申请权限的代码
-                            ActivityCompat.requestPermissions(UserCenterActivity.this,
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+            case R.id.circle_avatar:
+                mPhotoPopupWindow = new PhotoPopupWindow(UserCenterActivity.this, v -> {
+                    // 权限申请
+                    if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        //权限还没有授予，需要在这里写申请权限的代码
+                        ActivityCompat.requestPermissions(UserCenterActivity.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+                    } else {
+                        // 如果权限已经申请过，直接进行图片选择
+                        mPhotoPopupWindow.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        intent.setType("image/*");
+                        // 判断系统中是否有处理该 Intent 的 Activity
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(intent, REQUEST_IMAGE_GET);
                         } else {
-                            // 如果权限已经申请过，直接进行图片选择
-                            mPhotoPopupWindow.dismiss();
-                            Intent intent = new Intent(Intent.ACTION_PICK);
-                            intent.setType("image/*");
-                            // 判断系统中是否有处理该 Intent 的 Activity
-                            if (intent.resolveActivity(getPackageManager()) != null) {
-                                startActivityForResult(intent, REQUEST_IMAGE_GET);
-                            } else {
-                                Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // 权限申请
-                        if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                                || ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            // 权限还没有授予，需要在这里写申请权限的代码
-                            ActivityCompat.requestPermissions(UserCenterActivity.this,
-                                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 300);
-                        } else {
-                            // 权限已经申请，直接拍照
-                            mPhotoPopupWindow.dismiss();
-                            imageCapture();
-                        }
+                }, v -> {
+                    // 权限申请
+                    if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                            || ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // 权限还没有授予，需要在这里写申请权限的代码
+                        ActivityCompat.requestPermissions(UserCenterActivity.this,
+                                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 300);
+                    } else {
+                        // 权限已经申请，直接拍照
+                        mPhotoPopupWindow.dismiss();
+                        imageCapture();
                     }
                 });
                 View rootView = LayoutInflater.from(UserCenterActivity.this)
@@ -300,13 +241,56 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         }
     }
 
+    /**
+     * 保存用户信息
+     */
+    private void saveData(){
+        String name = etUsername.getText().toString().trim();
+        String birthday = etBirthday.getText().toString().trim();
+        String userSex = rgGender.getCheckedRadioButtonId() == R.id.rb_man ? "M" : "F";
+        if (TextUtils.isEmpty(name)) {
+            SingleToast.showMsg("请输入昵称！");
+            return;
+        }
+        if (TextUtils.isEmpty(timeBirth)) {
+            SingleToast.showMsg("请选择出生日期！");
+            return;
+        }
+        
+        like = etLike.getText().toString().trim();
+        wantGift = etWantGift.getText().toString().trim();
+        likeAnimation = etLikeAnimation.getText().toString().trim();
+        idol = etIdol.getText().toString().trim();
+        likeGame = etLikeGame.getText().toString().trim();
+        headUrl = "";
+        if (!TextUtils.isEmpty(newHeadUrl))
+            headUrl = newHeadUrl;
+        else if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getAvatarUrl())) {
+            headUrl = DataCenter.getInstance().getUser().getAvatarUrl();
+        }
+        HashMap<String, Object> paramsMap = new HashMap<>();
+        paramsMap.put("nickName", name);
+        paramsMap.put("birthday", timeBirth + " 00:00:00");
+        paramsMap.put("userSex", sex);
+        paramsMap.put("userHobby", like);
+        paramsMap.put("likeGift", wantGift);
+        paramsMap.put("likeCartoon", likeAnimation);
+        paramsMap.put("likeIdol", idol);
+        paramsMap.put("likeGame", likeGame);
+        if (!TextUtils.isEmpty(headUrl))
+            paramsMap.put("avatarUrl", headUrl);
+        String strEntity = gson.toJson(paramsMap);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
+        updateType = 0;
+        userCenterPresenter.saveUser(body);
+    }
+
     @Override
     public void onUpdateCurrentDateTask(HttpResult httpResult) {
         if (httpResult != null) {
             if ("0000".equals(httpResult.getCode())) {
                 SingleToast.showMsg("保存成功！！");
-                getSharedPreferences(Constant.PREFERENCES_DB, Context.MODE_PRIVATE).edit().putBoolean(Constant.FIRST_LOGIN, false).apply();
-                if (updateType == 0){
+                if (updateType == 0) {
                     DataCenter.getInstance().getUser().setNickname(name);
                     DataCenter.getInstance().getUser().setBirthday(timeBirth);
                     DataCenter.getInstance().getUser().setUserSex(sex);
@@ -318,7 +302,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
                     DataCenter.getInstance().getUser().setAvatarUrl(headUrl);
                     DataCenter.getInstance().getUser().setLogin(true);
                     userInfoPresenter.getUserInfo();
-                }else {
+                } else {
                     DataCenter.getInstance().getUser().setAvatarUrl(newHeadUrl);
                 }
 
@@ -331,7 +315,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         if (uploadResult != null) {
             if ("0000".equals(uploadResult.getCode())) {
                 if (!TextUtils.isEmpty(uploadResult.getData().getUrl())) {
-                    Glide.with(this).load(uploadResult.getData().getUrl()).into(niceIv0);
+                    Glide.with(this).load(uploadResult.getData().getUrl()).into(circleAvatar);
                     newHeadUrl = uploadResult.getData().getUrl();
 //                    SingleToast.showMsg("头像上传成功！");
                     HashMap<String, Object> paramsMap = new HashMap<>();
@@ -426,13 +410,10 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
                 case REQUEST_BIG_IMAGE_CUTTING:
                     File file = new File(mImageUri);
                     uploadFile(file);
-//                    Bitmap bitmap = BitmapFactory.decodeFile(mImageUri.getEncodedPath());
-//                    niceIv0.setImageBitmap(bitmap);
                     break;
                 // 相册选取
                 case REQUEST_IMAGE_GET:
                     try {
-                        // startSmallPhotoZoom(data.getData());
                         startBigPhotoZoom(data.getData());
                     } catch (NullPointerException e) {
                         e.printStackTrace();
@@ -441,7 +422,6 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
                 // 拍照
                 case REQUEST_IMAGE_CAPTURE:
                     File temp = new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME);
-                    // startSmallPhotoZoom(Uri.fromFile(temp));
                     startBigPhotoZoom(temp);
             }
         }
@@ -481,7 +461,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
             }
 
             // 在视图中显示图片
-//            niceIv0.setImageBitmap(photo);
+//            circleAvatar.setImageBitmap(photo);
         }
     }
 
@@ -608,12 +588,13 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
 
     @Override
     public void onUserInfo(UserInfoBean userInfoBean) {
-        if (userInfoBean!= null){
-            DataCenter.getInstance().getUser().setForestCoinCount(userInfoBean.getForestCoinCount());
-            if (DataCenter.getInstance().getUser().getForestCoinCount_ls() != 0)
-                tvAixin.setText(DataCenter.getInstance().getUser().getForestCoinCount() + "+" + DataCenter.getInstance().getUser().getForestCoinCount_ls());
+        if (userInfoBean != null) {
+            User user = DataCenter.getInstance().getUser();
+            user.setForestCoinCount(userInfoBean.getForestCoinCount());
+            if (user.getForestCoinCount_ls() != 0)
+                tvAixin.setText(user.getForestCoinCount() + "+" + user.getForestCoinCount_ls());
             else
-                tvAixin.setText(DataCenter.getInstance().getUser().getForestCoinCount()+ "");
+                tvAixin.setText(user.getForestCoinCount() + "");
             tvName.setText(userInfoBean.getNickName());
         }
     }

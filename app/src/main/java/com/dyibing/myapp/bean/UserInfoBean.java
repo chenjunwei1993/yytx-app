@@ -20,6 +20,7 @@ public class UserInfoBean {
 
     private String userId;
     private String nickName;
+    private String userGrade;
     private String birthday;
     private String userSex;
     private String userHobby;
@@ -125,5 +126,13 @@ public class UserInfoBean {
 
     public void setLikesCount(int likesCount) {
         this.likesCount = likesCount;
+    }
+
+    public String getUserGrade() {
+        return userGrade;
+    }
+
+    public void setUserGrade(String userGrade) {
+        this.userGrade = userGrade;
     }
 }

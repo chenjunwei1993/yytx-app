@@ -5,11 +5,10 @@
     android:background="#F8ECDC">
 
     <ImageView
-        android:id="@+id/iv_finish_status"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@mipmap/four" />
+        android:src="@drawable/four" />
 
 
     <Button

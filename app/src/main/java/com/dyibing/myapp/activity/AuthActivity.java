@@ -40,6 +40,11 @@ import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * @Descripttion: 扫码授权
+ * @Author: 陈俊伟
+ * @Date: 2020/8/26
+ */
 public class AuthActivity extends AppCompatActivity implements WXAuthView, LoginView {
     @BindView(R.id.img_wx)
     ImageView imgWx;
@@ -166,7 +171,6 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
         String receiveForestCoinStatus = loginBean.getReceiveForestCoinStatus();
         if ("noStock".equals(loginBean.getUserStockType())) {
             //新用户，第一次登录，不用判断是否完成任务 后台添加森林币业务
-            SPUtils.getInstance(Constant.PREFERENCES_DB).put(Constant.FIRST_LOGIN, true);
             startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
