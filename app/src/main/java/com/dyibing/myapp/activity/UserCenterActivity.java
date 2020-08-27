@@ -26,16 +26,24 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
 import com.dyibing.myapp.bean.UploadResult;
-import com.dyibing.myapp.bean.User;
 import com.dyibing.myapp.bean.UserInfoBean;
-import com.dyibing.myapp.common.Constant;
 import com.dyibing.myapp.mvp.presenter.UserCenterPresenter;
 import com.dyibing.myapp.mvp.presenter.UserInfoPresenter;
 import com.dyibing.myapp.mvp.view.UserCenterView;
@@ -43,9 +51,8 @@ import com.dyibing.myapp.mvp.view.UserInfoView;
 import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.utils.DateUtils;
 import com.dyibing.myapp.utils.SingleToast;
+import com.dyibing.myapp.utils.Utils;
 import com.dyibing.myapp.view.CircleImageView;
-import com.dyibing.myapp.view.DrawableCenterTextView;
-import com.dyibing.myapp.view.DrawableTextView;
 import com.dyibing.myapp.view.PhotoPopupWindow;
 import com.google.gson.Gson;
 
@@ -53,13 +60,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.HashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,8 +74,8 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     CircleImageView circleAvatar;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_aixin)
-    TextView tvAixin;
+    @BindView(R.id.tv_forest_coin_Count)
+    TextView tvForestCoinCount;
     @BindView(R.id.iv_back)
     TextView ivBack;
     @BindView(R.id.et_username)
@@ -92,10 +92,10 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     RadioGroup rgGender;
     @BindView(R.id.et_like)
     EditText etLike;
-    @BindView(R.id.et_want_gift)
-    EditText etWantGift;
-    @BindView(R.id.et_like_animation)
-    EditText etLikeAnimation;
+    @BindView(R.id.et_like_gift)
+    EditText etLikeGift;
+    @BindView(R.id.et_like_cartoon)
+    EditText etLikeCartoon;
     @BindView(R.id.et_idol)
     EditText etIdol;
     @BindView(R.id.et_like_game)
@@ -104,7 +104,6 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     ImageView ivSave;
     @BindView(R.id.tv_user_id_show)
     TextView tvUserIdShow;
-
 
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -121,167 +120,138 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_center);
         ButterKnife.bind(this);
-        initView();
         userCenterPresenter = new UserCenterPresenter(this, this);
         userInfoPresenter = new UserInfoPresenter(this, this);
     }
 
-    private void initView() {
-        User user = DataCenter.getInstance().getUser();
-        if (!TextUtils.isEmpty(user.getAvatarUrl())) {
-            Glide.with(this).load(user.getAvatarUrl()).into(circleAvatar);
-        }
-        if (!TextUtils.isEmpty(user.getNickname())) {
-            tvName.setText(user.getNickname());
-            etUsername.setText(user.getNickname());
-        } else {
-            tvName.setText(DataCenter.getInstance().getUserId());
-        }
-        if (user.getForestCoinCount_ls() != 0) {
-            tvAixin.setText(user.getForestCoinCount() + "+" + user.getForestCoinCount_ls());
-        } else {
-            tvAixin.setText(user.getForestCoinCount() + "");
-        }
-        tvUserIdShow.setText(DataCenter.getInstance().getUserId());
-        String strBirthday = user.getBirthday();
-        if (!TextUtils.isEmpty(strBirthday)) {
-            if (strBirthday.endsWith("00:00:00")) {
-                strBirthday = strBirthday.replace(" 00:00:00", "");
-            }
-            etBirthday.setText(strBirthday);
-            timeBirth = strBirthday;
-        }
-        if ("M".equals(user.getUserSex())) {
-            rbMan.setChecked(true);
-        } else {
-            rbWoman.setChecked(true);
-        }
-        if (!TextUtils.isEmpty(user.getUserHobby())) {
-            etLike.setText(user.getUserHobby());
-        }
-        if (!TextUtils.isEmpty(user.getLikeGift())) {
-            etWantGift.setText(user.getLikeGift());
-        }
-        if (!TextUtils.isEmpty(user.getLikeCartoon())) {
-            etLikeAnimation.setText(user.getLikeCartoon());
-        }
-        if (!TextUtils.isEmpty(user.getLikeIdol())) {
-            etIdol.setText(user.getLikeIdol());
-        }
-        if (!TextUtils.isEmpty(user.getLikeGame())) {
-            etLikeGame.setText(user.getLikeGame());
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userInfoPresenter.getUserInfo();
     }
 
     Gson gson = new Gson();
 
-    @OnClick({R.id.circle_avatar, R.id.iv_back, R.id.et_birthday, R.id.iv_save})
+    @OnClick({R.id.circle_avatar, R.id.iv_back, R.id.rl_birthday, R.id.rl_user_grade, R.id.iv_save})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.et_birthday:
+            case R.id.rl_birthday:
                 //时间选择器
                 TimePickerView pvTime = new TimePickerBuilder(UserCenterActivity.this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         String time = DateUtils.convertToString(DateUtils.DATE_FORMAT, date);
-                        etBirthday.setText(time);
+                        Utils.setText(time, etBirthday);
                     }
                 }).build();
                 pvTime.show();
                 break;
+            case R.id.rl_user_grade:
+                OptionsPickerView pvUserGrade = new OptionsPickerBuilder(UserCenterActivity.this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        Utils.setText(Utils.getGradeList().get(options1), etUserGrade);
+                    }
+                }).build();
+
+                pvUserGrade.setPicker(Utils.getGradeList());
+                pvUserGrade.show();
+                break;
 
             case R.id.iv_save:
-                
+                saveData();
                 break;
             case R.id.circle_avatar:
-                mPhotoPopupWindow = new PhotoPopupWindow(UserCenterActivity.this, v -> {
-                    // 权限申请
-                    if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        //权限还没有授予，需要在这里写申请权限的代码
-                        ActivityCompat.requestPermissions(UserCenterActivity.this,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
-                    } else {
-                        // 如果权限已经申请过，直接进行图片选择
-                        mPhotoPopupWindow.dismiss();
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setType("image/*");
-                        // 判断系统中是否有处理该 Intent 的 Activity
-                        if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(intent, REQUEST_IMAGE_GET);
-                        } else {
-                            Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, v -> {
-                    // 权限申请
-                    if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(UserCenterActivity.this,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // 权限还没有授予，需要在这里写申请权限的代码
-                        ActivityCompat.requestPermissions(UserCenterActivity.this,
-                                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 300);
-                    } else {
-                        // 权限已经申请，直接拍照
-                        mPhotoPopupWindow.dismiss();
-                        imageCapture();
-                    }
-                });
-                View rootView = LayoutInflater.from(UserCenterActivity.this)
-                        .inflate(R.layout.activity_main, null);
-                mPhotoPopupWindow.showAtLocation(rootView,
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                updateAvatar();
                 break;
         }
     }
 
     /**
+     * 更新头像
+     */
+    private void updateAvatar() {
+        mPhotoPopupWindow = new PhotoPopupWindow(UserCenterActivity.this, v -> {
+            // 权限申请
+            if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                //权限还没有授予，需要在这里写申请权限的代码
+                ActivityCompat.requestPermissions(UserCenterActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+            } else {
+                // 如果权限已经申请过，直接进行图片选择
+                mPhotoPopupWindow.dismiss();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                // 判断系统中是否有处理该 Intent 的 Activity
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_GET);
+                } else {
+                    Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, v -> {
+            // 权限申请
+            if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // 权限还没有授予，需要在这里写申请权限的代码
+                ActivityCompat.requestPermissions(UserCenterActivity.this,
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 300);
+            } else {
+                // 权限已经申请，直接拍照
+                mPhotoPopupWindow.dismiss();
+                imageCapture();
+            }
+        });
+        View rootView = LayoutInflater.from(UserCenterActivity.this)
+                .inflate(R.layout.activity_main, null);
+        mPhotoPopupWindow.showAtLocation(rootView,
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    }
+
+    /**
      * 保存用户信息
      */
-    private void saveData(){
-        String name = etUsername.getText().toString().trim();
+    private void saveData() {
+        String nickName = etUsername.getText().toString().trim();
         String birthday = etBirthday.getText().toString().trim();
+        String userGrade = etUserGrade.getText().toString().trim();
         String userSex = rgGender.getCheckedRadioButtonId() == R.id.rb_man ? "M" : "F";
-        if (TextUtils.isEmpty(name)) {
+        String userHobby = etLike.getText().toString().trim();
+        String likeGift = etLikeGift.getText().toString().trim();
+        String likeCartoon = etLikeCartoon.getText().toString().trim();
+        String likeIdol = etIdol.getText().toString().trim();
+        String likeGame = etLikeGame.getText().toString().trim();
+        if (TextUtils.isEmpty(nickName)) {
             SingleToast.showMsg("请输入昵称！");
             return;
         }
-        if (TextUtils.isEmpty(timeBirth)) {
+        if (TextUtils.isEmpty(birthday) || TextUtils.equals("点击选择", birthday)) {
             SingleToast.showMsg("请选择出生日期！");
             return;
         }
-        
-        like = etLike.getText().toString().trim();
-        wantGift = etWantGift.getText().toString().trim();
-        likeAnimation = etLikeAnimation.getText().toString().trim();
-        idol = etIdol.getText().toString().trim();
-        likeGame = etLikeGame.getText().toString().trim();
-        headUrl = "";
-        if (!TextUtils.isEmpty(newHeadUrl))
-            headUrl = newHeadUrl;
-        else if (!TextUtils.isEmpty(DataCenter.getInstance().getUser().getAvatarUrl())) {
-            headUrl = DataCenter.getInstance().getUser().getAvatarUrl();
+        if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
+            SingleToast.showMsg("请选择年级！");
+            return;
         }
         HashMap<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("nickName", name);
-        paramsMap.put("birthday", timeBirth + " 00:00:00");
-        paramsMap.put("userSex", sex);
-        paramsMap.put("userHobby", like);
-        paramsMap.put("likeGift", wantGift);
-        paramsMap.put("likeCartoon", likeAnimation);
-        paramsMap.put("likeIdol", idol);
+        paramsMap.put("nickName", nickName);
+        paramsMap.put("birthday", birthday + " 00:00:00");
+        paramsMap.put("userSex", userSex);
+        paramsMap.put("userHobby", userHobby);
+        paramsMap.put("likeGift", likeGift);
+        paramsMap.put("likeCartoon", likeCartoon);
+        paramsMap.put("likeIdol", likeIdol);
         paramsMap.put("likeGame", likeGame);
-        if (!TextUtils.isEmpty(headUrl))
-            paramsMap.put("avatarUrl", headUrl);
         String strEntity = gson.toJson(paramsMap);
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
-        updateType = 0;
         userCenterPresenter.saveUser(body);
     }
 
@@ -290,23 +260,10 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         if (httpResult != null) {
             if ("0000".equals(httpResult.getCode())) {
                 SingleToast.showMsg("保存成功！！");
-                if (updateType == 0) {
-                    DataCenter.getInstance().getUser().setNickname(name);
-                    DataCenter.getInstance().getUser().setBirthday(timeBirth);
-                    DataCenter.getInstance().getUser().setUserSex(sex);
-                    DataCenter.getInstance().getUser().setUserHobby(like);
-                    DataCenter.getInstance().getUser().setLikeGift(wantGift);
-                    DataCenter.getInstance().getUser().setLikeCartoon(likeAnimation);
-                    DataCenter.getInstance().getUser().setLikeIdol(idol);
-                    DataCenter.getInstance().getUser().setLikeGame(likeGame);
-                    DataCenter.getInstance().getUser().setAvatarUrl(headUrl);
-                    DataCenter.getInstance().getUser().setLogin(true);
-                    userInfoPresenter.getUserInfo();
-                } else {
-                    DataCenter.getInstance().getUser().setAvatarUrl(newHeadUrl);
-                }
-
-            } else SingleToast.showMsg(httpResult.getMsg());
+                userInfoPresenter.getUserInfo();
+            } else {
+                SingleToast.showMsg(httpResult.getMsg());
+            }
         }
     }
 
@@ -314,15 +271,14 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     public void onUpload(UploadResult uploadResult) {
         if (uploadResult != null) {
             if ("0000".equals(uploadResult.getCode())) {
-                if (!TextUtils.isEmpty(uploadResult.getData().getUrl())) {
-                    Glide.with(this).load(uploadResult.getData().getUrl()).into(circleAvatar);
-                    newHeadUrl = uploadResult.getData().getUrl();
+                String avatarUrl = uploadResult.getData().getUrl();
+                if (!TextUtils.isEmpty(avatarUrl)) {
+                    Glide.with(this).load(avatarUrl).into(circleAvatar);
 //                    SingleToast.showMsg("头像上传成功！");
                     HashMap<String, Object> paramsMap = new HashMap<>();
-                    paramsMap.put("avatarUrl", newHeadUrl);
+                    paramsMap.put("avatarUrl", avatarUrl);
                     String strEntity = gson.toJson(paramsMap);
                     RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
-                    updateType = 1;
                     userCenterPresenter.saveUser(body);
                 }
             } else {
@@ -589,13 +545,42 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     @Override
     public void onUserInfo(UserInfoBean userInfoBean) {
         if (userInfoBean != null) {
-            User user = DataCenter.getInstance().getUser();
-            user.setForestCoinCount(userInfoBean.getForestCoinCount());
-            if (user.getForestCoinCount_ls() != 0)
-                tvAixin.setText(user.getForestCoinCount() + "+" + user.getForestCoinCount_ls());
-            else
-                tvAixin.setText(user.getForestCoinCount() + "");
-            tvName.setText(userInfoBean.getNickName());
+            setDataToView(userInfoBean);
         }
+    }
+
+    private void setDataToView(UserInfoBean userInfoBean) {
+        if (!TextUtils.isEmpty(userInfoBean.getAvatarUrl())) {
+            Glide.with(this).load(userInfoBean.getAvatarUrl()).into(circleAvatar);
+        }
+        if (!TextUtils.isEmpty(userInfoBean.getNickName())) {
+            Utils.setText(userInfoBean.getNickName(), tvName);
+            Utils.setText(userInfoBean.getNickName(), etUsername);
+        } else {
+            Utils.setText(DataCenter.getInstance().getUserId(), tvName);
+        }
+        Utils.setText(String.valueOf(userInfoBean.getForestCoinCount()), tvForestCoinCount);
+        Utils.setText(DataCenter.getInstance().getUserId(), tvUserIdShow);
+
+        String strBirthday = userInfoBean.getBirthday();
+        if (!TextUtils.isEmpty(strBirthday)) {
+            if (strBirthday.endsWith("00:00:00")) {
+                strBirthday = strBirthday.replace(" 00:00:00", "");
+            }
+            Utils.setText(strBirthday, etBirthday);
+        }
+        if ("M".equals(userInfoBean.getUserSex())) {
+            rbMan.setChecked(true);
+        } else {
+            rbWoman.setChecked(true);
+        }
+        if (!TextUtils.isEmpty(userInfoBean.getUserGrade())) {
+            Utils.setText(userInfoBean.getUserGrade(), etUserGrade);
+        }
+        Utils.setText(userInfoBean.getUserHobby(), etLike);
+        Utils.setText(userInfoBean.getLikeGift(), etLikeGift);
+        Utils.setText(userInfoBean.getLikeCartoon(), etLikeCartoon);
+        Utils.setText(userInfoBean.getLikeIdol(), etIdol);
+        Utils.setText(userInfoBean.getLikeGame(), etLikeGame);
     }
 }

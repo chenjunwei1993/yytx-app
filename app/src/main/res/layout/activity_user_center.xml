@@ -39,7 +39,7 @@
 
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/tv_aixin"
+            android:id="@+id/tv_forest_coin_Count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -48,7 +48,7 @@
             android:layout_toEndOf="@+id/circle_avatar"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_16_sp"
-            android:drawableStart="@drawable/aixin"
+            android:drawableStart="@drawable/forest_coin"
             android:drawablePadding="5dp"
             android:text="18"/>
         <TextView
@@ -176,6 +176,7 @@
                 android:text="出生年月"/>
 
             <RelativeLayout
+                android:id="@+id/rl_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/tv_time_birth"
@@ -222,6 +223,7 @@
                 android:text="年级"/>
 
             <RelativeLayout
+                android:id="@+id/rl_user_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/tv_user_grade"
@@ -354,7 +356,7 @@
                 android:text="最想得到的礼物"/>
 
             <EditText
-                android:id="@+id/et_want_gift"
+                android:id="@+id/et_like_gift"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_et_info_bg"
@@ -375,7 +377,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
             <TextView
-                android:id="@+id/tv_like_animation"
+                android:id="@+id/tv_like_cartoon"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -386,12 +388,12 @@
                 android:text="喜欢的动画"/>
 
             <EditText
-                android:id="@+id/et_like_animation"
+                android:id="@+id/et_like_cartoon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_et_info_bg"
                 android:layout_marginEnd="10dp"
-                android:layout_toEndOf="@+id/tv_like_animation"
+                android:layout_toEndOf="@+id/tv_like_cartoon"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingStart="20dp"

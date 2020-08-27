@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/circle_avatar"
             android:layout_marginStart="20dp"
-            android:drawableStart="@drawable/aixin"
+            android:drawableStart="@drawable/forest_coin"
             android:drawablePadding="10dp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_16_sp" />

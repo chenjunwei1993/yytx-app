@@ -102,16 +102,16 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
         View view1 = View.inflate(this, R.layout.pager_item_one, null);
         View view2 = View.inflate(this, R.layout.pager_item_two, null);
         View view3 = View.inflate(this, R.layout.pager_item_three, null);
-        Button btnStart = view3.findViewById(R.id.btn_start);
+        Button btnLogin = view3.findViewById(R.id.btn_login);
         mList.add(view1);
         mList.add(view2);
         mList.add(view3);
         if (TextUtils.isEmpty(DataCenter.getInstance().getToken())) {
-            btnStart.setText(R.string.login_now);
+            btnLogin.setText(R.string.login_now);
         } else {
-            btnStart.setText(R.string.go_main);
+            btnLogin.setText(R.string.go_main);
         }
-        btnStart.setOnClickListener(new OnMultiClickListener() {
+        btnLogin.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
                 if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {

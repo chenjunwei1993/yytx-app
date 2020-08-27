@@ -4,6 +4,9 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
     //    当天的星期：monday：星期一，tuesday：星期二，wednesday：星期三，thursday：星期四，friday：星期五，saturday：星期六，sunday：星期日
     public static String getWeekString(String str) {
@@ -51,5 +54,16 @@ public class Utils {
             textView.setText("");
         }
         textView.setText(text);
+    }
+
+    public static List<String> getGradeList() {
+        List<String> gradeList = new ArrayList<>();
+        gradeList.add("一年级");
+        gradeList.add("二年级");
+        gradeList.add("三年级");
+        gradeList.add("四年级");
+        gradeList.add("五年级");
+        gradeList.add("六年级");
+        return gradeList;
     }
 }

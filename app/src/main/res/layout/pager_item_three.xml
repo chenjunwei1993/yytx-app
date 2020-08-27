@@ -22,7 +22,6 @@
         android:paddingStart="25dp"
         android:paddingEnd="25dp"
         android:text="立即登录"
-        android:textColor="@android:color/white"
-        android:visibility="gone"/>
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

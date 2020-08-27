@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements UserInfoView {
             return;
         }
         Utils.setText(String.valueOf(userInfoBean.getForestCoinCount()), tvForestCoinCount);
-        Glide.with(this).load(userInfoBean.getAvatarUrl()).into(circleAvatar);
+        if (!TextUtils.isEmpty(userInfoBean.getAvatarUrl())) {
+            Glide.with(this).load(userInfoBean.getAvatarUrl()).into(circleAvatar);
+        }
         if (!TextUtils.isEmpty(userInfoBean.getNickName())) {
             tvName.setText(userInfoBean.getNickName());
         } else {
