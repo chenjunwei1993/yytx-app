@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.Utils;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
 import com.dyibing.myapp.bean.ForestCoinBean;
@@ -171,10 +172,12 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
         String receiveForestCoinStatus = loginBean.getReceiveForestCoinStatus();
         if ("noStock".equals(loginBean.getUserStockType())) {
             //新用户，第一次登录，不用判断是否完成任务 后台添加森林币业务
-            startActivity(new Intent(this, MainActivity.class));
+            Intent intent = new Intent(this, EditUserActivity.class);
+            intent.putExtra(Constant.RECEIVE_FOREST_COIN_STATUS,receiveForestCoinStatus);
+            startActivity(intent);
             finish();
         } else {
-            if(TextUtils.equals("noReceive",receiveForestCoinStatus)){
+            if(com.dyibing.myapp.utils.Utils.isReceiveForestCoin(receiveForestCoinStatus)){
                 //显示森林币页面
                 startActivity(new Intent(this, ForestCoinActivity.class));
             }else{
