@@ -19,29 +19,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.bigkoo.pickerview.view.TimePickerView;
-import com.bumptech.glide.Glide;
-import com.dyibing.myapp.R;
-import com.dyibing.myapp.bean.UploadResult;
-import com.dyibing.myapp.common.Constant;
-import com.dyibing.myapp.mvp.presenter.UserCenterPresenter;
-import com.dyibing.myapp.net.HttpResult;
-import com.dyibing.myapp.utils.DateUtils;
-import com.dyibing.myapp.utils.SingleToast;
-import com.dyibing.myapp.utils.Utils;
-import com.dyibing.myapp.view.PhotoPopupWindow;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Date;
-import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,12 +29,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bumptech.glide.Glide;
+import com.dyibing.myapp.R;
+import com.dyibing.myapp.bean.DataCenter;
+import com.dyibing.myapp.bean.UploadResult;
+import com.dyibing.myapp.common.Constant;
+import com.dyibing.myapp.mvp.presenter.UserCenterPresenter;
+import com.dyibing.myapp.mvp.view.UserCenterView;
+import com.dyibing.myapp.net.HttpResult;
+import com.dyibing.myapp.utils.SingleToast;
+import com.dyibing.myapp.utils.Utils;
+import com.dyibing.myapp.utils.tts.AudioUtils;
+import com.dyibing.myapp.view.CircleImageView;
+import com.dyibing.myapp.view.PhotoPopupWindow;
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class EditUserActivity extends AppCompatActivity {
+public class EditUserActivity extends AppCompatActivity implements UserCenterView {
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.tv_user_id_show)
+    TextView tvUserIdShow;
+    @BindView(R.id.et_user_grade)
+    TextView etUserGrade;
+    @BindView(R.id.circle_avatar)
+    CircleImageView circleAvatar;
+    @BindView(R.id.et_upload_avatar)
+    TextView et_upload_avatar;
+
+
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_SMALL_IMAGE_CUTTING = 2;
@@ -64,30 +81,28 @@ public class EditUserActivity extends AppCompatActivity {
     private UserCenterPresenter userCenterPresenter;
     private PhotoPopupWindow mPhotoPopupWindow;
     private String receiveForestCoinStatus;
+    private String avatarUrl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_user);
         receiveForestCoinStatus = getIntent().getStringExtra(Constant.RECEIVE_FOREST_COIN_STATUS);
+        userCenterPresenter = new UserCenterPresenter(this,this);
+        setDataToView();
     }
 
-    @OnClick({R.id.circle_avatar, R.id.rl_user_grade, R.id.iv_save})
+    private void setDataToView(){
+        ButterKnife.bind(this);
+        Utils.setText(DataCenter.getInstance().getUserId(),tvUserIdShow);
+        AudioUtils.getInstance().speakText(getString(R.string.edit_user_tip));
+    }
+
+    @OnClick({R.id.circle_avatar, R.id.rl_user_grade, R.id.iv_start_explore,R.id.et_upload_avatar})
     public void onclick(View view) {
         switch (view.getId()) {
-
-            case R.id.rl_birthday:
-                //时间选择器
-                TimePickerView pvTime = new TimePickerBuilder(UserCenterActivity.this, new OnTimeSelectListener() {
-                    @Override
-                    public void onTimeSelect(Date date, View v) {
-                        String time = DateUtils.convertToString(DateUtils.DATE_FORMAT, date);
-                        Utils.setText(time, etBirthday);
-                    }
-                }).build();
-                pvTime.show();
-                break;
             case R.id.rl_user_grade:
-                OptionsPickerView pvUserGrade = new OptionsPickerBuilder(UserCenterActivity.this, new OnOptionsSelectListener() {
+                OptionsPickerView pvUserGrade = new OptionsPickerBuilder(EditUserActivity.this, new OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {
                         Utils.setText(Utils.getGradeList().get(options1), etUserGrade);
@@ -98,9 +113,10 @@ public class EditUserActivity extends AppCompatActivity {
                 pvUserGrade.show();
                 break;
 
-            case R.id.iv_save:
+            case R.id.iv_start_explore:
                 saveData();
                 break;
+            case R.id.et_upload_avatar:
             case R.id.circle_avatar:
                 updateAvatar();
                 break;
@@ -111,13 +127,13 @@ public class EditUserActivity extends AppCompatActivity {
      * 更新头像
      */
     private void updateAvatar() {
-        mPhotoPopupWindow = new PhotoPopupWindow(UserCenterActivity.this, v -> {
+        mPhotoPopupWindow = new PhotoPopupWindow(EditUserActivity.this, v -> {
             // 权限申请
-            if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+            if (ContextCompat.checkSelfPermission(EditUserActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 //权限还没有授予，需要在这里写申请权限的代码
-                ActivityCompat.requestPermissions(UserCenterActivity.this,
+                ActivityCompat.requestPermissions(EditUserActivity.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
             } else {
                 // 如果权限已经申请过，直接进行图片选择
@@ -128,18 +144,18 @@ public class EditUserActivity extends AppCompatActivity {
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_IMAGE_GET);
                 } else {
-                    Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditUserActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
                 }
             }
         }, v -> {
             // 权限申请
-            if (ContextCompat.checkSelfPermission(UserCenterActivity.this,
+            if (ContextCompat.checkSelfPermission(EditUserActivity.this,
                     Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(UserCenterActivity.this,
+                    || ContextCompat.checkSelfPermission(EditUserActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 // 权限还没有授予，需要在这里写申请权限的代码
-                ActivityCompat.requestPermissions(UserCenterActivity.this,
+                ActivityCompat.requestPermissions(EditUserActivity.this,
                         new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 300);
             } else {
                 // 权限已经申请，直接拍照
@@ -147,7 +163,7 @@ public class EditUserActivity extends AppCompatActivity {
                 imageCapture();
             }
         });
-        View rootView = LayoutInflater.from(UserCenterActivity.this)
+        View rootView = LayoutInflater.from(EditUserActivity.this)
                 .inflate(R.layout.activity_main, null);
         mPhotoPopupWindow.showAtLocation(rootView,
                 Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -158,20 +174,9 @@ public class EditUserActivity extends AppCompatActivity {
      */
     private void saveData() {
         String nickName = etUsername.getText().toString().trim();
-        String birthday = etBirthday.getText().toString().trim();
-        String userGrade = etUserGrade.getText().toString().trim();
-        String userSex = rgGender.getCheckedRadioButtonId() == R.id.rb_man ? "M" : "F";
-        String userHobby = etLike.getText().toString().trim();
-        String likeGift = etLikeGift.getText().toString().trim();
-        String likeCartoon = etLikeCartoon.getText().toString().trim();
-        String likeIdol = etIdol.getText().toString().trim();
-        String likeGame = etLikeGame.getText().toString().trim();
+        String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
         if (TextUtils.isEmpty(nickName)) {
             SingleToast.showMsg("请输入昵称！");
-            return;
-        }
-        if (TextUtils.isEmpty(birthday) || TextUtils.equals("点击选择", birthday)) {
-            SingleToast.showMsg("请选择出生日期！");
             return;
         }
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
@@ -180,14 +185,9 @@ public class EditUserActivity extends AppCompatActivity {
         }
         HashMap<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("nickName", nickName);
-        paramsMap.put("birthday", birthday + " 00:00:00");
-        paramsMap.put("userSex", userSex);
-        paramsMap.put("userHobby", userHobby);
-        paramsMap.put("likeGift", likeGift);
-        paramsMap.put("likeCartoon", likeCartoon);
-        paramsMap.put("likeIdol", likeIdol);
-        paramsMap.put("likeGame", likeGame);
-        String strEntity = gson.toJson(paramsMap);
+        paramsMap.put("userGrade", userGrade);
+        paramsMap.put("avatarUrl",avatarUrl);
+        String strEntity = new Gson().toJson(paramsMap);
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
         userCenterPresenter.saveUser(body);
     }
@@ -197,7 +197,12 @@ public class EditUserActivity extends AppCompatActivity {
         if (httpResult != null) {
             if ("0000".equals(httpResult.getCode())) {
                 SingleToast.showMsg("保存成功！！");
-                userInfoPresenter.getUserInfo();
+                if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
+                    startActivity(new Intent(EditUserActivity.this, ForestCoinActivity.class));
+                } else {
+                    startActivity(new Intent(EditUserActivity.this, MainActivity.class));
+                }
+                finish();
             } else {
                 SingleToast.showMsg(httpResult.getMsg());
             }
@@ -208,15 +213,17 @@ public class EditUserActivity extends AppCompatActivity {
     public void onUpload(UploadResult uploadResult) {
         if (uploadResult != null) {
             if ("0000".equals(uploadResult.getCode())) {
-                String avatarUrl = uploadResult.getData().getUrl();
+                avatarUrl = uploadResult.getData().getUrl();
                 if (!TextUtils.isEmpty(avatarUrl)) {
+                    circleAvatar.setVisibility(View.VISIBLE);
+                    et_upload_avatar.setVisibility(View.GONE);
                     Glide.with(this).load(avatarUrl).into(circleAvatar);
-//                    SingleToast.showMsg("头像上传成功！");
-                    HashMap<String, Object> paramsMap = new HashMap<>();
-                    paramsMap.put("avatarUrl", avatarUrl);
-                    String strEntity = gson.toJson(paramsMap);
-                    RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
-                    userCenterPresenter.saveUser(body);
+                    SingleToast.showMsg("头像上传成功！");
+//                    HashMap<String, Object> paramsMap = new HashMap<>();
+//                    paramsMap.put("avatarUrl", avatarUrl);
+//                    String strEntity = new Gson().toJson(paramsMap);
+//                    RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
+//                    userCenterPresenter.saveUser(body);
                 }
             } else {
                 SingleToast.showMsg(uploadResult.getMsg());
@@ -255,7 +262,7 @@ public class EditUserActivity extends AppCompatActivity {
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_IMAGE_GET);
                 } else {
-                    Toast.makeText(UserCenterActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditUserActivity.this, "未找到图片查看器", Toast.LENGTH_SHORT).show();
                 }
             } else imageCapture();
 //                    startCamera();
@@ -268,7 +275,7 @@ public class EditUserActivity extends AppCompatActivity {
                     .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(UserCenterActivity.this, permissions, 200);
+                            ActivityCompat.requestPermissions(EditUserActivity.this, permissions, 200);
                         }
                     })
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -382,7 +389,7 @@ public class EditUserActivity extends AppCompatActivity {
 
         // 开始切割
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(getImageContentUri(UserCenterActivity.this, inputFile), "image/*");
+        intent.setDataAndType(getImageContentUri(EditUserActivity.this, inputFile), "image/*");
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1); // 裁剪框比例
@@ -479,4 +486,9 @@ public class EditUserActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioUtils.getInstance().stopSpeaking();
+    }
 }

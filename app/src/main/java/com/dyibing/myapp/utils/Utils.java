@@ -58,6 +58,7 @@ public class Utils {
 
     public static List<String> getGradeList() {
         List<String> gradeList = new ArrayList<>();
+        gradeList.add("幼儿园");
         gradeList.add("一年级");
         gradeList.add("二年级");
         gradeList.add("三年级");
@@ -66,4 +67,65 @@ public class Utils {
         gradeList.add("六年级");
         return gradeList;
     }
+
+    public static String getGrade(String grade) {
+        String gradeStr = "";
+        switch (grade) {
+            case "kinderGarten":
+                gradeStr = "幼儿园";
+                break;
+            case "firstGrade":
+                gradeStr = "一年级";
+                break;
+            case "secondGrade":
+                gradeStr = "二年级";
+                break;
+            case "threeGrade":
+                gradeStr = "三年级";
+                break;
+            case "fourthGrade":
+                gradeStr = "四年级";
+                break;
+            case "fifthGrade":
+                gradeStr = "五年级";
+                break;
+            case "sixGrade":
+                gradeStr = "六年级";
+                break;
+            default:
+                break;
+        }
+        return gradeStr;
+    }
+
+    public static String getRequestGrade(String grade) {
+        String gradeStr = "";
+        switch (grade) {
+            case "幼儿园":
+                gradeStr = "kinderGarten";
+                break;
+            case "一年级":
+                gradeStr = "firstGrade";
+                break;
+            case "二年级":
+                gradeStr = "secondGrade";
+                break;
+            case "三年级":
+                gradeStr = "threeGrade";
+                break;
+            case "四年级":
+                gradeStr = "fourthGrade";
+                break;
+            case "五年级":
+                gradeStr = "fifthGrade";
+                break;
+            case "六年级":
+                gradeStr = "sixGrade";
+                break;
+            default:
+                break;
+        }
+        return gradeStr;
+    }
+
 }

@@ -5,49 +5,70 @@
     android:id="@+id/srl_fresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg"
+    android:background="@drawable/bg_main1"
     tools:context=".activity.MainActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_header"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/bg_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
         tools:ignore="UselessParent">
 
         <com.dyibing.myapp.view.CircleImageView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="4dp"
             android:id="@+id/circle_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
             android:src="@drawable/default_head"
             app:civ_border_color="#05C2BE"
             app:civ_border_width="2dp" />
 
 
         <TextView
+            app:layout_constraintTop_toTopOf="@+id/circle_avatar"
+            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/circle_avatar"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/circle_avatar"
-            android:textColor="@color/text_color"
+            android:layout_marginLeft="10dp"
+            android:textColor="#954207"
             android:textSize="@dimen/text_16_sp" />
 
         <TextView
+            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/circle_avatar"
             android:id="@+id/tv_forest_coin_Count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/circle_avatar"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:drawableStart="@drawable/forest_coin"
-            android:drawablePadding="10dp"
-            android:textColor="@color/text_color"
+            android:drawablePadding="5dp"
+            android:textColor="#954207"
             android:textSize="@dimen/text_16_sp" />
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_gold"
+        app:layout_constraintTop_toBottomOf="@+id/cl_header"
+        android:src="@drawable/ic_gold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@+id/iv_gold"
+        android:src="@drawable/ic_fragment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

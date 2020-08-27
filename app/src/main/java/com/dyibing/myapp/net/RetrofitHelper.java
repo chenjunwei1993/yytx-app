@@ -36,7 +36,7 @@ public class RetrofitHelper {
     //开发环境
     String releaseHost="http://127.0.0.1:8001/yysgplatform/";
     //测试环境
-    String debugHost="http://24:45:78:154/yyexploreApp";
+    String debugHost="http://39.99.249.185/yyexploreApp/";
 
     private RetrofitHelper() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();

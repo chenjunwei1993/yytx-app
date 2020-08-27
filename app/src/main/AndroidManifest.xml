@@ -86,6 +86,12 @@
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+        <activity
+            android:name=".activity.AnswerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.dyibing.myapp.fileProvider"

@@ -222,7 +222,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     private void saveData() {
         String nickName = etUsername.getText().toString().trim();
         String birthday = etBirthday.getText().toString().trim();
-        String userGrade = etUserGrade.getText().toString().trim();
+        String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
         String userSex = rgGender.getCheckedRadioButtonId() == R.id.rb_man ? "M" : "F";
         String userHobby = etLike.getText().toString().trim();
         String likeGift = etLikeGift.getText().toString().trim();
@@ -244,6 +244,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         HashMap<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("nickName", nickName);
         paramsMap.put("birthday", birthday + " 00:00:00");
+        paramsMap.put("userGrade", userGrade);
         paramsMap.put("userSex", userSex);
         paramsMap.put("userHobby", userHobby);
         paramsMap.put("likeGift", likeGift);
@@ -560,7 +561,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
             Utils.setText(DataCenter.getInstance().getUserId(), tvName);
         }
         Utils.setText(String.valueOf(userInfoBean.getForestCoinCount()), tvForestCoinCount);
-        Utils.setText(DataCenter.getInstance().getUserId(), tvUserIdShow);
+        Utils.setText(userInfoBean.getUserId(), tvUserIdShow);
 
         String strBirthday = userInfoBean.getBirthday();
         if (!TextUtils.isEmpty(strBirthday)) {
@@ -575,7 +576,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
             rbWoman.setChecked(true);
         }
         if (!TextUtils.isEmpty(userInfoBean.getUserGrade())) {
-            Utils.setText(userInfoBean.getUserGrade(), etUserGrade);
+            Utils.setText(Utils.getGrade(userInfoBean.getUserGrade()), etUserGrade);
         }
         Utils.setText(userInfoBean.getUserHobby(), etLike);
         Utils.setText(userInfoBean.getLikeGift(), etLikeGift);
