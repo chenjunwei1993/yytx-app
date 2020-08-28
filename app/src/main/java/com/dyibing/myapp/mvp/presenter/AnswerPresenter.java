@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.dyibing.myapp.bean.QuestionBean;
 import com.dyibing.myapp.mvp.model.AnswerModel;
-import com.dyibing.myapp.mvp.model.ForestCoinModel;
 import com.dyibing.myapp.mvp.view.AnswerView;
-import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.mvp.view.IBaseView;
 import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.net.rx.ProgressSubscriber;

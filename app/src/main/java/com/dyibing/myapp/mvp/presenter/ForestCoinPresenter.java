@@ -2,9 +2,11 @@ package com.dyibing.myapp.mvp.presenter;
 
 import android.content.Context;
 
+import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.mvp.model.ForestCoinModel;
 import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.mvp.view.IBaseView;
+import com.dyibing.myapp.mvp.view.LoginView;
 import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.net.rx.ProgressSubscriber;
 
@@ -26,6 +28,15 @@ public class ForestCoinPresenter extends BasePresenter{
 
     public void receiveForestCoin(RequestBody body) {
         Subscription subscription = mModel.receiveForestCoin(body,new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoin((HttpResult) o), mContext));
+        subList.add(subscription);
+    }
+
+    /**
+     * 是否领取森林币
+     */
+
+    public void receiveForestCoinStatus() {
+        Subscription subscription = mModel.receiveForestCoinStatus(new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoinStatus((ForestCoinBean) o), mContext));
         subList.add(subscription);
     }
 }

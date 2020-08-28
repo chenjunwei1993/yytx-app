@@ -88,17 +88,17 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
         receiveForestCoinStatus = getIntent().getStringExtra(Constant.RECEIVE_FOREST_COIN_STATUS);
-        userCenterPresenter = new UserCenterPresenter(this,this);
+        userCenterPresenter = new UserCenterPresenter(this, this);
         setDataToView();
     }
 
-    private void setDataToView(){
+    private void setDataToView() {
         ButterKnife.bind(this);
-        Utils.setText(DataCenter.getInstance().getUserId(),tvUserIdShow);
+        Utils.setText(DataCenter.getInstance().getUserId(), tvUserIdShow);
         AudioUtils.getInstance().speakText(getString(R.string.edit_user_tip));
     }
 
-    @OnClick({R.id.circle_avatar, R.id.rl_user_grade, R.id.iv_start_explore,R.id.et_upload_avatar})
+    @OnClick({R.id.circle_avatar, R.id.rl_user_grade, R.id.iv_start_explore, R.id.et_upload_avatar})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.rl_user_grade:
@@ -175,18 +175,15 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
     private void saveData() {
         String nickName = etUsername.getText().toString().trim();
         String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
-        if (TextUtils.isEmpty(nickName)) {
-            SingleToast.showMsg("请输入昵称！");
-            return;
-        }
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
             SingleToast.showMsg("请选择年级！");
+            AudioUtils.getInstance().speakText(getString(R.string.no_user_grade_tip));
             return;
         }
         HashMap<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("nickName", nickName);
         paramsMap.put("userGrade", userGrade);
-        paramsMap.put("avatarUrl",avatarUrl);
+        paramsMap.put("avatarUrl", avatarUrl);
         String strEntity = new Gson().toJson(paramsMap);
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
         userCenterPresenter.saveUser(body);

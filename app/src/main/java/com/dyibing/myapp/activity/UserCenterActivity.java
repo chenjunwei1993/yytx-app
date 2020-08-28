@@ -52,6 +52,7 @@ import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.utils.DateUtils;
 import com.dyibing.myapp.utils.SingleToast;
 import com.dyibing.myapp.utils.Utils;
+import com.dyibing.myapp.utils.tts.AudioUtils;
 import com.dyibing.myapp.view.CircleImageView;
 import com.dyibing.myapp.view.PhotoPopupWindow;
 import com.google.gson.Gson;
@@ -239,6 +240,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         }
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
             SingleToast.showMsg("请选择年级！");
+            AudioUtils.getInstance().speakText(getString(R.string.no_user_grade_tip));
             return;
         }
         HashMap<String, Object> paramsMap = new HashMap<>();
@@ -546,6 +548,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     @Override
     public void onUserInfo(UserInfoBean userInfoBean) {
         if (userInfoBean != null) {
+            DataCenter.getInstance().setUserGrade(userInfoBean.getUserGrade());
             setDataToView(userInfoBean);
         }
     }

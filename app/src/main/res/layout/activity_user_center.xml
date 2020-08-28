@@ -155,8 +155,8 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
                 android:textColorHint="@color/hint_text_color"
-                android:hint="限10个字"
-                android:maxLength="10"/>
+                android:hint="限8个字"
+                android:maxLength="8"/>
 
         </RelativeLayout>
 
@@ -336,7 +336,8 @@
                 android:paddingEnd="20dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
-                android:hint="限15个字"/>
+                android:maxLength="30"
+                android:hint="限30个字"/>
 
         </RelativeLayout>
 
@@ -368,7 +369,8 @@
                 android:paddingEnd="20dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
-                android:hint="限15个字"/>
+                android:maxLength="30"
+                android:hint="限30个字"/>
 
         </RelativeLayout>
 
@@ -400,7 +402,8 @@
                 android:paddingEnd="20dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
-                android:hint="限15个字"/>
+                android:maxLength="30"
+                android:hint="限30个字"/>
 
         </RelativeLayout>
 
@@ -432,7 +435,8 @@
                 android:paddingEnd="20dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
-                android:hint="限15个字"/>
+                android:maxLength="30"
+                android:hint="限30个字"/>
 
         </RelativeLayout>
 
@@ -464,7 +468,8 @@
                 android:paddingEnd="20dp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp"
-                android:hint="限15个字"/>
+                android:maxLength="30"
+                android:hint="限30个字"/>
 
         </RelativeLayout>
 

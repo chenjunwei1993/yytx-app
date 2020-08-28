@@ -10,5 +10,5 @@ public class Constant {
     public static final String APP_ID = "wx3b103538f24b17f0";
     public static final String APP_SECRET = "49a4776ba70cca2e0fdb22e18c21819e";
     public static final String RECEIVE_FOREST_COIN_STATUS = "RECEIVE_FOREST_COIN_STATUS";
-
+    public static final String FOREST_COIN_AMOUNT = "FOREST_COIN_AMOUNT";
 }

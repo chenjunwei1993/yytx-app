@@ -28,4 +28,7 @@
     <string name="answer_forest">本次答题可获得森林币</string>
     <string name="end_answer">结束答题</string>
     <string name="receiver_one_coin">获得一个森林币</string>
+    <string name="no_user_grade_tip">嘿，作为好朋友，你要告诉丫丫你的年级哦</string>
+    <string name="receiver_forest_coin">领取%1$s个森林币</string>
+    <string name="exchange_total">回收总价：%1$s</string>
 </resources>

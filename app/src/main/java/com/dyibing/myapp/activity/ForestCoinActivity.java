@@ -2,6 +2,7 @@ package com.dyibing.myapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
+import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.mvp.presenter.ForestCoinPresenter;
 import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.net.HttpResult;
@@ -30,6 +32,7 @@ public class ForestCoinActivity extends AppCompatActivity implements ForestCoinV
     Button btnGetslb;
 
     private ForestCoinPresenter forestCoinPresenter;
+    private int forestCoinAmount = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,9 +41,10 @@ public class ForestCoinActivity extends AppCompatActivity implements ForestCoinV
         init();
     }
 
-    private void init(){
+    private void init() {
         ButterKnife.bind(this);
         forestCoinPresenter = new ForestCoinPresenter(this, this);
+        forestCoinPresenter.receiveForestCoinStatus();
     }
 
     @OnClick({R.id.btn_getslb})
@@ -49,7 +53,7 @@ public class ForestCoinActivity extends AppCompatActivity implements ForestCoinV
             case R.id.btn_getslb:
                 HashMap<String, Object> paramsMap = new HashMap<>();
                 paramsMap.put("userId", DataCenter.getInstance().getUserId());
-                paramsMap.put("forestCoinCount", 1);
+                paramsMap.put("forestCoinCount", forestCoinAmount);
                 String strEntity = new Gson().toJson(paramsMap);
                 RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
                 forestCoinPresenter.receiveForestCoin(body);
@@ -68,6 +72,12 @@ public class ForestCoinActivity extends AppCompatActivity implements ForestCoinV
         }
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public void onReceiveForestCoinStatus(ForestCoinBean forestCoinBean) {
+        forestCoinAmount = forestCoinBean.getForestCoinAmount();
+        btnGetslb.setText(getString(R.string.receiver_forest_coin, forestCoinAmount + ""));
     }
 
     @Override

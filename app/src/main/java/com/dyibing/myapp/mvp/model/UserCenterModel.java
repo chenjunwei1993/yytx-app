@@ -12,25 +12,6 @@ import rx.Subscriber;
 import rx.Subscription;
 
 public class UserCenterModel extends BaseModel {
-//
-//    public Subscription saveUser(String nickName,String birthday,String userSex,String userHobby,
-//                                       String likeGift,
-//                                      String likeCartoon,
-//                                      String likeIdol,
-//                                      String likeGame,
-//                                      String avatarUrl,
-//                                      String parentWxId,  Subscriber subscriber) {
-//        Observable<HttpResult> observable = RetrofitHelper
-//                .getService(UserCenterService.class)
-//                .saveUser( nickName, birthday, userSex, userHobby,
-//                         likeGift,
-//                         likeCartoon,
-//                         likeIdol,
-//                         likeGame,
-//                         avatarUrl,
-//                         parentWxId);
-//        return toSubscribe(observable, subscriber);
-//    }
     public Subscription saveUser(RequestBody body, Subscriber subscriber) {
         Observable<HttpResult> observable = RetrofitHelper
                 .getService(UserCenterService.class)

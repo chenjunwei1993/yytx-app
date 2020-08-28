@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dyibing.myapp.bean.UserInfoBean;
 import com.dyibing.myapp.mvp.model.LoginModel;
+import com.dyibing.myapp.mvp.model.UserInfoModel;
 import com.dyibing.myapp.mvp.view.IBaseView;
 import com.dyibing.myapp.mvp.view.LoginView;
 import com.dyibing.myapp.mvp.view.UserInfoView;
@@ -12,11 +13,11 @@ import com.dyibing.myapp.net.rx.ProgressSubscriber;
 import rx.Subscription;
 
 public class UserInfoPresenter extends BasePresenter {
-    private final LoginModel mModel;
+    private final UserInfoModel mModel;
 
     public UserInfoPresenter(Context mContext, IBaseView view) {
         super(mContext, view);
-        mModel = new LoginModel();
+        mModel = new UserInfoModel();
     }
 
     /**

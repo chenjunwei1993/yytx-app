@@ -34,7 +34,6 @@
                 android:layout_alignTop="@+id/circle_avatar"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/circle_avatar"
-                android:text="陈俊伟"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp" />
 
@@ -49,7 +48,6 @@
                 android:drawableStart="@drawable/forest_coin"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:text="18"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_16_sp" />
 

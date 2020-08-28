@@ -1,6 +1,5 @@
 package com.dyibing.myapp.fragment;
 
-import android.media.Image;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,11 +65,11 @@ public class StartAnswerDialogFragment extends BaseDialogFragment {
             ll_answer_tip.setVisibility(View.GONE);
         }
 
-        iv_answer_tip.setOnClickListener(new OnMultiClickListener() {
+        view.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
                 dismiss();
-                if(null != onDismissListener){
+                if (null != onDismissListener) {
                     onDismissListener.setOnDismissListener();
                 }
             }

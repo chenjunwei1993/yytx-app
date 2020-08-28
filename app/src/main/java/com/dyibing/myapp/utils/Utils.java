@@ -131,6 +131,18 @@ public class Utils {
         return gradeStr;
     }
 
+    public static String getQuestionIds(List<String> strings) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < strings.size(); i++) {
+            if (i == strings.size() - 1) {
+                stringBuilder.append(strings.get(i));
+            } else {
+                stringBuilder.append(strings.get(i) + ",");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     public static void fullScreen(Window window) {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION

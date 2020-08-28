@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:showDividers="middle">
+
+    <TextView
+        android:id="@+id/tv_decrease"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_amount_unable"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="-"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/etAmount"
+        android:layout_width="36dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/login_bg"
+        android:gravity="center"
+        android:inputType="number"
+        android:text="0"
+        android:textColor="@color/text_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_increase"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_amount_enable"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="+"
+        android:textColor="@color/white" />
+</LinearLayout>

@@ -21,13 +21,9 @@ import com.blankj.utilcode.util.LogUtils;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
 import com.dyibing.myapp.bean.ForestCoinBean;
-import com.dyibing.myapp.bean.LoginBean;
-import com.dyibing.myapp.bean.UserInfoBean;
 import com.dyibing.myapp.listener.OnMultiClickListener;
 import com.dyibing.myapp.mvp.presenter.ForestCoinPresenter;
-import com.dyibing.myapp.mvp.presenter.LoginPresenter;
 import com.dyibing.myapp.mvp.view.ForestCoinView;
-import com.dyibing.myapp.mvp.view.LoginView;
 import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.utils.Utils;
 import com.dyibing.myapp.utils.tts.AudioUtils;
@@ -44,11 +40,9 @@ import butterknife.ButterKnife;
  * @Author: 陈俊伟
  * @Date: 2020/8/26
  */
-public class SplashActivity extends AppCompatActivity implements LoginView, ForestCoinView {
+public class SplashActivity extends AppCompatActivity implements ForestCoinView {
     public final String TAG = getClass().getSimpleName();
     private String receiveForestCoinStatus;
-
-    private ForestCoinPresenter forestCoinPresenter;
 
     @BindView(R.id.mViewPager)
     ViewPager mViewPager;
@@ -73,7 +67,7 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
             Manifest.permission.RECORD_AUDIO
     };
 
-    private LoginPresenter loginPresenter;
+    private ForestCoinPresenter forestCoinPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,9 +81,8 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
     private void init() {
         ButterKnife.bind(this);
         AudioUtils.getInstance().init(this); //初始化语音对象
-        loginPresenter = new LoginPresenter(this, this);
         forestCoinPresenter = new ForestCoinPresenter(this, this);
-        loginPresenter.receiveForestCoinStatus();
+        forestCoinPresenter.receiveForestCoinStatus();
     }
 
     private void initView() {
@@ -114,15 +107,16 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
         btnLogin.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
-                if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
-                    startActivity(new Intent(SplashActivity.this, ForestCoinActivity.class));
+                if (TextUtils.isEmpty(DataCenter.getInstance().getToken())) {
+                    //未登录 进入授权
+                    startActivity(new Intent(SplashActivity.this, AuthActivity.class));
                 } else {
-                    if (TextUtils.isEmpty(DataCenter.getInstance().getToken())) {
-                        startActivity(new Intent(SplashActivity.this, AuthActivity.class));
+                    //已经登录
+                    if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
+                        startActivity(new Intent(SplashActivity.this, ForestCoinActivity.class));
                     } else {
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     }
-
                 }
                 finish();
             }
@@ -197,23 +191,13 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
     }
 
     @Override
-    public void onLogin(LoginBean loginBean) {
-
-    }
-
-    @Override
-    public void onUserInfo(UserInfoBean userInfoBean) {
+    public void onReceiveForestCoin(HttpResult httpResult) {
 
     }
 
     @Override
     public void onReceiveForestCoinStatus(ForestCoinBean forestCoinBean) {
         receiveForestCoinStatus = forestCoinBean.getReceiveForestCoinStatus();
-    }
-
-    @Override
-    public void onReceiveForestCoin(HttpResult httpResult) {
-
     }
 
     class GuideAdapter extends PagerAdapter {

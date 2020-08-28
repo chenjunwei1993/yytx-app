@@ -8,13 +8,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.Utils;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
-import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.bean.LoginBean;
 import com.dyibing.myapp.bean.UserInfoBean;
 import com.dyibing.myapp.bean.WXTicketBean;
@@ -33,8 +34,6 @@ import com.tencent.mm.opensdk.diffdev.OAuthListener;
 import java.util.HashMap;
 import java.util.Random;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -192,10 +191,4 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
     public void onUserInfo(UserInfoBean userInfoBean) {
 
     }
-
-    @Override
-    public void onReceiveForestCoinStatus(ForestCoinBean forestCoinBean) {
-
-    }
-
 }
