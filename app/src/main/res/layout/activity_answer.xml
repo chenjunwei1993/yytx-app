@@ -29,64 +29,19 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_question_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="这里是题目肌肤的及房间诶发件人结果人家发的股份认购人"
             android:textColor="@color/text_color"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/tv_answer_a"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_answer"
-            android:gravity="center"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp"
-            android:text="A 这是答案这是答案这是答案辅导费"
-            android:textColor="#003352"
-            android:textSize="12sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/rv_answer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/tv_answer_b"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_answer"
-            android:gravity="center"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp"
-            android:text="B 这是答案这是答案这是答案辅导费"
-            android:textColor="#003352"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_answer_c"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_answer"
-            android:gravity="center"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp"
-            android:text="C 这是答案这是答案这是答案辅导费"
-            android:textColor="#003352"
-            android:textSize="12sp" />
-
-
-        <TextView
-            android:id="@+id/tv_answer_d"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_answer"
-            android:gravity="center"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp"
-            android:text="D 这是答案这是答案这是答案辅导费"
-            android:textColor="#003352"
-            android:textSize="12sp" />
 
     </LinearLayout>
 

@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface AnswerService {
@@ -17,8 +18,10 @@ public interface AnswerService {
      * @return
      */
     @Headers("Content-Type:application/json")
-    @GET("/question/questionInfo")
-    Observable<HttpResult<QuestionBean>> getQuestionInfo(String userGrade, String questionIds);
+    @GET("question/questionInfo")
+    Observable<HttpResult<QuestionBean>> getQuestionInfo(
+            @Query("userGrade") String userGrade,
+            @Query("questionIds") String questionIds);
 
     /**
      * 答题
@@ -26,6 +29,6 @@ public interface AnswerService {
      * @return
      */
     @Headers("Content-Type:application/json")
-    @POST("/question/submitQuestion")
+    @POST("question/submitQuestion")
     Observable<HttpResult> submitQuestion(@Body RequestBody body);
 }
