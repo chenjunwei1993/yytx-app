@@ -209,7 +209,6 @@ public class SplashActivity extends AppCompatActivity implements LoginView, Fore
     @Override
     public void onReceiveForestCoinStatus(ForestCoinBean forestCoinBean) {
         receiveForestCoinStatus = forestCoinBean.getReceiveForestCoinStatus();
-        initView();
     }
 
     @Override

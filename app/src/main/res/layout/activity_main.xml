@@ -10,41 +10,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_header"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:background="@drawable/bg_header"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="200dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UselessParent">
 
         <com.dyibing.myapp.view.CircleImageView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="4dp"
             android:id="@+id/circle_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginLeft="4dp"
             android:src="@drawable/default_head"
             app:civ_border_color="#05C2BE"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            app:layout_constraintTop_toTopOf="@+id/circle_avatar"
-            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textColor="#954207"
-            android:textSize="@dimen/text_16_sp" />
+            android:textSize="@dimen/text_16_sp"
+            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
+            app:layout_constraintTop_toTopOf="@+id/circle_avatar" />
 
         <TextView
-            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
-            app:layout_constraintBottom_toBottomOf="@+id/circle_avatar"
             android:id="@+id/tv_forest_coin_Count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,22 +51,27 @@
             android:drawableStart="@drawable/forest_coin"
             android:drawablePadding="5dp"
             android:textColor="#954207"
-            android:textSize="@dimen/text_16_sp" />
+            android:textSize="@dimen/text_16_sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circle_avatar"
+            app:layout_constraintLeft_toRightOf="@+id/circle_avatar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/iv_gold"
-        app:layout_constraintTop_toBottomOf="@+id/cl_header"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/ic_gold"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/cl_header" />
 
     <ImageView
-        app:layout_constraintTop_toBottomOf="@+id/iv_gold"
+        android:id="@+id/iv_fragment"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_fragment"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/iv_gold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

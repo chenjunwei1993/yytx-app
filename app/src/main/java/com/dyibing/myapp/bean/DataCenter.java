@@ -52,4 +52,15 @@ public class DataCenter {
         return mUser.getUserId();
     }
 
+    public void setUserGrade(String userGrade){
+        mUser.setUserGrade(userGrade);
+    }
+
+    public String getUserGrade(){
+        if (TextUtils.isEmpty(mUser.getUserGrade())) {
+            mUser.setUserGrade(SPUtils.getInstance(Constant.PREFERENCES_DB).getString(Constant.USER_GRADE));
+        }
+        return mUser.getUserGrade();
+    }
+
 }

@@ -87,6 +87,12 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
+            android:name=".activity.StartAnswerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
             android:name=".activity.AnswerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="fullSensor"

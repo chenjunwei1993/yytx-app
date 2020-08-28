@@ -2,6 +2,9 @@ package com.dyibing.myapp.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -128,4 +131,12 @@ public class Utils {
         return gradeStr;
     }
 
+    public static void fullScreen(Window window) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        window.getDecorView().setSystemUiVisibility(uiOptions);
+    }
 }

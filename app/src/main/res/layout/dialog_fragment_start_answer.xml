@@ -1,30 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_centerInParent="true"
         android:layout_width="288dp"
         android:layout_height="304dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_answer_tip"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/bg_answer_tip">
+        android:orientation="vertical">
+
         <ImageView
-            android:src="@drawable/ic_people4"
+            android:id="@+id/iv_answer_tip"
             android:layout_width="65dp"
-            android:layout_height="53dp"/>
+            android:layout_height="53dp"
+            android:src="@drawable/ic_people4" />
 
         <TextView
-            android:layout_marginTop="10dp"
-            android:textSize="12sp"
-            android:text="@string/go_main"
+            android:id="@+id/tv_answer_tip"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/answer_first_tip"
+            android:textColor="#333"
+            android:textSize="12sp" />
+        
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_answer_tip"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_answer_reciver_forest"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:gravity="center">
 
+            <ImageView
+                android:src="@drawable/forest_coin"
+                android:layout_width="12dp"
+                android:layout_height="12dp"/>
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="@string/receiver_one_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        
+    </LinearLayout>
 
 
 </RelativeLayout>

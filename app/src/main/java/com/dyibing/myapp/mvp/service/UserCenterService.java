@@ -13,27 +13,6 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 public interface UserCenterService {
-
-    /**
-     * 用户信息保存
-     *
-     * @return
-     */
-//    @Headers("Content-Type:application/json")
-//    @FormUrlEncoded
-//    @POST("childrenUser/saveUser")
-//    Observable<HttpResult> saveUser(@Field("nickName") String nickName,
-//                                                 @Field("birthday") String birthday,
-//                                                 @Field("userSex") String userSex,
-//                                                 @Field("userHobby") String userHobby,
-//                                                 @Field("likeGift") String likeGift,
-//                                                 @Field("likeCartoon") String likeCartoon,
-//                                                 @Field("likeIdol") String likeIdol,
-//                                                 @Field("likeGame") String likeGame,
-//                                                 @Field("avatarUrl") String avatarUrl,
-//                                                 @Field("parentWxId") String parentWxId);
-
-
     /**
      * 用户信息保存
      *
