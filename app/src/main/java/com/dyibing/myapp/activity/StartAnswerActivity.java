@@ -32,7 +32,7 @@ public class StartAnswerActivity extends AppCompatActivity implements UserInfoVi
     CircleImageView circleAvatar;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_forest_coin_Count)
+    @BindView(R.id.tv_forest_coin_count)
     TextView tvForestCoinCount;
 
     private UserInfoPresenter userInfoPresenter;
@@ -47,9 +47,12 @@ public class StartAnswerActivity extends AppCompatActivity implements UserInfoVi
         userInfoPresenter.getUserInfo();
     }
 
-    @OnClick({R.id.iv_start_answer, R.id.iv_back})
+    @OnClick({R.id.circle_avatar, R.id.iv_start_answer, R.id.iv_back})
     public void onclick(View view) {
         switch (view.getId()) {
+            case R.id.circle_avatar:
+                startActivity(new Intent(this, UserCenterActivity.class));
+                break;
             case R.id.iv_back:
                 finish();
                 break;
@@ -59,6 +62,7 @@ public class StartAnswerActivity extends AppCompatActivity implements UserInfoVi
                 break;
         }
     }
+
     @Override
     public void onUserInfo(UserInfoBean userInfoBean) {
         if (userInfoBean == null) {

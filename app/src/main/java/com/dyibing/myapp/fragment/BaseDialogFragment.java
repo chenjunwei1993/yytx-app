@@ -33,10 +33,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
       if(null != window){
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-        getDialog().setOnShowListener(dialog -> {
-          window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-          Utils.fullScreen(window);
-        });
+//        getDialog().setOnShowListener(dialog -> {
+//          window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+//          Utils.fullScreen(window);
+//        });
       }
     }
     return super.onCreateView(inflater, container, savedInstanceState);

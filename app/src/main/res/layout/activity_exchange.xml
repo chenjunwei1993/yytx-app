@@ -36,7 +36,7 @@
 
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/tv_forest_coin_Count"
+            android:id="@+id/tv_forest_coin_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -110,6 +110,7 @@
                 android:layout_height="wrap_content"/>
 
             <com.dyibing.myapp.view.AmountView
+                android:id="@+id/amount_view"
                 android:layout_marginLeft="5dp"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"/>
@@ -124,13 +125,15 @@
             android:gravity="center_vertical">
 
             <TextView
+                android:id="@+id/tv_total_forest"
                 android:textSize="14sp"
                 android:textColor="@color/text_color"
-                android:text="回收总价："
+                android:text="回收总价：5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <ImageView
+                android:layout_marginLeft="4dp"
                 android:src="@drawable/forest_coin"
                 android:layout_width="12dp"
                 android:layout_height="12dp"/>

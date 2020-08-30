@@ -25,7 +25,7 @@ public class UserInfoPresenter extends BasePresenter {
      */
 
     public void getUserInfo() {
-        Subscription subscription = mModel.getUserInfo(new ProgressSubscriber(o -> ((UserInfoView) mView).onUserInfo((UserInfoBean) o), mContext));
+        Subscription subscription = mModel.getUserInfo(new ProgressSubscriber(o -> ((UserInfoView) mView).onUserInfo((UserInfoBean) o), mContext,false));
         subList.add(subscription);
     }
 

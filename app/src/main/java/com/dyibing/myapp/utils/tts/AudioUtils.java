@@ -2,6 +2,7 @@ package com.dyibing.myapp.utils.tts;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.iflytek.cloud.InitListener;
@@ -36,6 +37,9 @@ public class AudioUtils {
 
 
     public void speakText(String content){
+        if(TextUtils.isEmpty(content)){
+            return;
+        }
         int code =mySynthesizer.startSpeaking(content,new SynthesizerListener(){
 
             @Override

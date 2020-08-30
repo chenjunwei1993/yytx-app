@@ -13,7 +13,7 @@ import com.dyibing.myapp.net.rx.ProgressSubscriber;
 import okhttp3.RequestBody;
 import rx.Subscription;
 
-public class ForestCoinPresenter extends BasePresenter{
+public class ForestCoinPresenter extends BasePresenter {
 
     private final ForestCoinModel mModel;
 
@@ -27,7 +27,7 @@ public class ForestCoinPresenter extends BasePresenter{
      */
 
     public void receiveForestCoin(RequestBody body) {
-        Subscription subscription = mModel.receiveForestCoin(body,new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoin((HttpResult) o), mContext));
+        Subscription subscription = mModel.receiveForestCoin(body, new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoin((HttpResult) o), mContext));
         subList.add(subscription);
     }
 
@@ -36,7 +36,7 @@ public class ForestCoinPresenter extends BasePresenter{
      */
 
     public void receiveForestCoinStatus() {
-        Subscription subscription = mModel.receiveForestCoinStatus(new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoinStatus((ForestCoinBean) o), mContext));
+        Subscription subscription = mModel.receiveForestCoinStatus(new ProgressSubscriber(o -> ((ForestCoinView) mView).onReceiveForestCoinStatus((ForestCoinBean) o), mContext, false));
         subList.add(subscription);
     }
 }

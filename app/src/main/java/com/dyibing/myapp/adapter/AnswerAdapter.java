@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 public class AnswerAdapter extends RecyclerView.Adapter {
     private final Context mContext;
     private List<String> answers = new ArrayList<>();
+    private String sort = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private OnItemClickListener onItemClickListener;
 
@@ -47,7 +48,8 @@ public class AnswerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         String answer = answers.get(position);
         RecyclerHolder recyclerHolder = (RecyclerHolder) holder;
-        Utils.setText(answer, recyclerHolder.tvAnswer);
+
+        Utils.setText(sort.charAt(position) + " " + answer, recyclerHolder.tvAnswer);
         holder.itemView.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {

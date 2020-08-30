@@ -20,6 +20,7 @@
             android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/iv_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_answer"
@@ -50,6 +51,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_end_answer"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="40dp"

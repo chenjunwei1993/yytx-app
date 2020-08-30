@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/main_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.dyibing.myapp.view.CircleImageView
+                    android:id="@+id/circle_avatar"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/default_head"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#05C2BE" />
+
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/circle_avatar"
+                    android:layout_toEndOf="@+id/circle_avatar"
+                    android:layout_marginStart="10dp"
+                    android:textSize="@dimen/text_16_sp"
+                    android:textColor="@color/text_color" />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tv_forest_coin_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_alignBottom="@+id/circle_avatar"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/circle_avatar"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_16_sp"
+                    android:drawableStart="@drawable/forest_coin"
+                    android:drawablePadding="5dp" />
+                <TextView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_button3_bg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_16_sp"
+                    android:text="返回"
+                    android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0664C0" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_gravity="left"
+                        android:id="@+id/iv_pre"
+                        android:src="@drawable/ic_pre"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_next"
+                        android:id="@+id/iv_next"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_fragment"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_project_bg">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:lineSpacingExtra="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_16_sp"
+                    android:text="集齐拼图，让爸爸妈妈微信联系丫丫兑换礼物哦，丫丫微信号："/>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_gift"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_project_bg">
+
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+                        <View
+                            android:background="#F6AF2A"
+                            android:layout_width="5dp"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:layout_marginLeft="12dp"
+                            android:textSize="14sp"
+                            android:textColor="#e4451b"
+                            android:text="兑换列表"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/rv_gift"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>

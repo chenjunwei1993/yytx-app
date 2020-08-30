@@ -1,8 +1,9 @@
 package com.dyibing.myapp.bean;
 
 public class ForestCoinBean {
-    public String receiveForestCoinStatus;
-    public int forestCoinAmount;
+    private String receiveForestCoinStatus;
+    private int forestCoinAmount;
+    private int forestCoinCount;
 
     public String getReceiveForestCoinStatus() {
         return receiveForestCoinStatus;
@@ -18,5 +19,13 @@ public class ForestCoinBean {
 
     public void setForestCoinAmount(int forestCoinAmount) {
         this.forestCoinAmount = forestCoinAmount;
+    }
+
+    public int getForestCoinCount() {
+        return forestCoinCount;
+    }
+
+    public void setForestCoinCount(int forestCoinCount) {
+        this.forestCoinCount = forestCoinCount;
     }
 }

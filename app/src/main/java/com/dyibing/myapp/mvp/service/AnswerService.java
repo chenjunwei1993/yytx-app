@@ -1,6 +1,8 @@
 package com.dyibing.myapp.mvp.service;
 
+import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.bean.QuestionBean;
+import com.dyibing.myapp.bean.SubmitQuestionBean;
 import com.dyibing.myapp.net.HttpResult;
 
 import okhttp3.RequestBody;
@@ -21,7 +23,8 @@ public interface AnswerService {
     @GET("question/questionInfo")
     Observable<HttpResult<QuestionBean>> getQuestionInfo(
             @Query("userGrade") String userGrade,
-            @Query("questionIds") String questionIds);
+            @Query("questionIds") String questionIds,
+            @Query("batchNumber") String batchNumber);
 
     /**
      * 答题
@@ -30,5 +33,15 @@ public interface AnswerService {
      */
     @Headers("Content-Type:application/json")
     @POST("question/submitQuestion")
-    Observable<HttpResult> submitQuestion(@Body RequestBody body);
+    Observable<HttpResult<SubmitQuestionBean>> submitQuestion(@Body RequestBody body);
+
+    /**
+     * 获取本轮答题获取的森林币个数
+     *
+     * @return
+     */
+    @Headers("Content-Type:application/json")
+    @GET("question/queryForestCoinCountByBatchNumber")
+    Observable<HttpResult<ForestCoinBean>> queryForestCoinCountByBatchNumber(
+            @Query("batchNumber") String batchNumber);
 }

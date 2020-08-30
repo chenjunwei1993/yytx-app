@@ -38,7 +38,7 @@
                 android:textSize="@dimen/text_16_sp" />
 
             <TextView
-                android:id="@+id/tv_forest_coin_Count"
+                android:id="@+id/tv_forest_coin_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/circle_avatar"

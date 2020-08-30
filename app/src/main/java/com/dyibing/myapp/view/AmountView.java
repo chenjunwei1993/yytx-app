@@ -15,7 +15,7 @@ import com.dyibing.myapp.R;
 public class AmountView extends LinearLayout implements View.OnClickListener, TextWatcher {
     private int position = -1;
 
-    private int amount = 0; //购买数量
+    private int amount = 1; //购买数量
     private int goods_storage = 100; //商品库存
     private EditText etAmount;
     private TextView tvDecrease;
@@ -38,16 +38,6 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         etAmount.setFocusable(false);
     }
 
-
-    /**
-     * 位置
-     *
-     * @param position
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     /**
      * 设置库存方法
      *
@@ -57,28 +47,6 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         this.goods_storage = goods_storage;
     }
 
-    /**
-     * 获取数量
-     *
-     * @return
-     */
-    public int getAmount() {
-        return amount;
-    }
-
-    /**
-     * 设置数量
-     *
-     * @param amount
-     */
-    public void setAmount(int amount) {
-        this.amount = amount;
-        etAmount.setText(this.amount + "");
-        if (this.amount >= 0) {
-            etAmount.setVisibility(VISIBLE);
-            tvDecrease.setVisibility(VISIBLE);
-        }
-    }
 
     /**
      * 增加，减少事件监听

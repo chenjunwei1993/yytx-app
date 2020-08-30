@@ -5,6 +5,7 @@ import java.util.List;
 public class QuestionBean {
     private String examLogId;
     private String questionContent;
+    private String batchNumber;
     private List<String> answerList;
 
     public String getExamLogId() {
@@ -29,5 +30,13 @@ public class QuestionBean {
 
     public void setAnswerList(List<String> answerList) {
         this.answerList = answerList;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
     }
 }

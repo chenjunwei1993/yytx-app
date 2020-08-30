@@ -164,22 +164,27 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
 
     @Override
     public void onLogin(LoginBean loginBean) {
-        DataCenter.getInstance().setUserId(loginBean.getUserOpenId());
-        DataCenter.getInstance().setToken(loginBean.getToken());
-        SPUtils.getInstance(Constant.PREFERENCES_DB).put(Constant.TOKEN, loginBean.getToken());
-        SPUtils.getInstance(Constant.PREFERENCES_DB).put(Constant.USER_OPEN_ID, loginBean.getUserOpenId());
+        if (!TextUtils.isEmpty(loginBean.getUserOpenId())) {
+            DataCenter.getInstance().setUserId(loginBean.getUserOpenId());
+            SPUtils.getInstance(Constant.PREFERENCES_DB).put(Constant.USER_OPEN_ID, loginBean.getUserOpenId());
+        }
+        if (!TextUtils.isEmpty(loginBean.getToken())) {
+            DataCenter.getInstance().setToken(loginBean.getToken());
+            SPUtils.getInstance(Constant.PREFERENCES_DB).put(Constant.TOKEN, loginBean.getToken());
+        }
+
         String receiveForestCoinStatus = loginBean.getReceiveForestCoinStatus();
         if ("noStock".equals(loginBean.getUserStockType())) {
             //新用户，第一次登录，不用判断是否完成任务 后台添加森林币业务
             Intent intent = new Intent(this, EditUserActivity.class);
-            intent.putExtra(Constant.RECEIVE_FOREST_COIN_STATUS,receiveForestCoinStatus);
+            intent.putExtra(Constant.RECEIVE_FOREST_COIN_STATUS, receiveForestCoinStatus);
             startActivity(intent);
             finish();
         } else {
-            if(com.dyibing.myapp.utils.Utils.isReceiveForestCoin(receiveForestCoinStatus)){
+            if (com.dyibing.myapp.utils.Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
                 //显示森林币页面
                 startActivity(new Intent(this, ForestCoinActivity.class));
-            }else{
+            } else {
                 //本地有领取记录 说明已经领取
                 startActivity(new Intent(this, MainActivity.class));
             }

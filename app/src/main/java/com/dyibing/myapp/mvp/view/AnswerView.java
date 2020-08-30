@@ -1,6 +1,8 @@
 package com.dyibing.myapp.mvp.view;
 
+import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.bean.QuestionBean;
+import com.dyibing.myapp.bean.SubmitQuestionBean;
 import com.dyibing.myapp.net.HttpResult;
 
 public interface AnswerView extends IBaseView {
@@ -16,5 +18,12 @@ public interface AnswerView extends IBaseView {
      *
      * @param httpResult
      */
-    void submitQuestion(HttpResult httpResult);
+    void submitQuestion(HttpResult<SubmitQuestionBean> httpResult);
+
+    /**
+     * 获取本轮答题获取的森林币个数
+     *
+     * @param forestCoinBean
+     */
+    void queryForestCoinCountByBatchNumber(ForestCoinBean forestCoinBean);
 }

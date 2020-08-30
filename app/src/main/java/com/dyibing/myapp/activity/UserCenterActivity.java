@@ -75,7 +75,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     CircleImageView circleAvatar;
     @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_forest_coin_Count)
+    @BindView(R.id.tv_forest_coin_count)
     TextView tvForestCoinCount;
     @BindView(R.id.iv_back)
     TextView ivBack;
