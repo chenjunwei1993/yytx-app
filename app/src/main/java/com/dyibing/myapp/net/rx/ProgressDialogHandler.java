@@ -1,12 +1,15 @@
 package com.dyibing.myapp.net.rx;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dyibing.myapp.R;
+import com.dyibing.myapp.view.ProgressDialog;
 
 
 public class ProgressDialogHandler extends Handler {
@@ -30,8 +33,7 @@ public class ProgressDialogHandler extends Handler {
 
     private void initProgressDialog() {
         if (pd == null) {
-            pd = new ProgressDialog(context);
-            pd.setMessage(context.getString(R.string.loading_tip));
+            pd = ProgressDialog.newInstance();
             pd.setCancelable(cancelable);
 
             if (cancelable) {
@@ -42,9 +44,7 @@ public class ProgressDialogHandler extends Handler {
                     }
                 });
             }
-            if (!pd.isShowing()) {
-                pd.show();
-            }
+            pd.show(((AppCompatActivity)context).getFragmentManager(),"");
         }
     }
 

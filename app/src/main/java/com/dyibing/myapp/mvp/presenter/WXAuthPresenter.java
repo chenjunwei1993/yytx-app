@@ -31,7 +31,7 @@ public class WXAuthPresenter extends BasePresenter {
     }
 
     /**
-     * token信息
+     * Ticket信息
      */
 
     public void getWXTicketBean(String access_token) {

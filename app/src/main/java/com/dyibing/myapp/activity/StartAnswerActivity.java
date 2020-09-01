@@ -47,13 +47,13 @@ public class StartAnswerActivity extends AppCompatActivity implements UserInfoVi
         userInfoPresenter.getUserInfo();
     }
 
-    @OnClick({R.id.circle_avatar, R.id.iv_start_answer, R.id.iv_back})
+    @OnClick({R.id.circle_avatar, R.id.iv_start_answer, R.id.ll_back})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.circle_avatar:
                 startActivity(new Intent(this, UserCenterActivity.class));
                 break;
-            case R.id.iv_back:
+            case R.id.ll_back:
                 finish();
                 break;
             case R.id.iv_start_answer:

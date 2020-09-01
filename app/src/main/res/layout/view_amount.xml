@@ -8,34 +8,36 @@
 
     <TextView
         android:id="@+id/tv_decrease"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:background="@drawable/bg_amount_unable"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="-"
+        android:textSize="8sp"
         android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/etAmount"
-        android:layout_width="36dp"
+        android:layout_width="18dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:background="@drawable/login_bg"
         android:gravity="center"
         android:inputType="number"
         android:text="1"
         android:textColor="@color/text_color"
-        android:textSize="14sp" />
+        android:textSize="7sp" />
 
     <TextView
         android:id="@+id/tv_increase"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:background="@drawable/bg_amount_enable"
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="+"
+        android:textSize="8sp"
         android:textColor="@color/white" />
 </LinearLayout>

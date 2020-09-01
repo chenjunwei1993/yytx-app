@@ -1,115 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:background="@color/main_bg">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/main_bg"
         android:orientation="vertical">
+        <include layout="@layout/default_header" />
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.dyibing.myapp.view.CircleImageView
-                android:id="@+id/circle_avatar"
-                app:civ_border_color="#05C2BE"
-                app:civ_border_width="2dp"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/default_head" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/circle_avatar"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/circle_avatar"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/text_16_sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/shape_project_bg"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_forest_coin_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/circle_avatar"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/circle_avatar"
-                android:drawableStart="@drawable/forest_coin"
-                android:drawablePadding="5dp"
-                android:gravity="center"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/text_16_sp" />
+                    <TextView
+                        android:lineSpacingExtra="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:text="@string/start_answer_tip"
+                        android:textColor="@color/text_color"
+                        android:textSize="7sp" />
 
-            <TextView
-                android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/shape_button3_bg"
-                android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"
-                android:gravity="center"
-                android:paddingStart="8dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="5dp"
-                android:text="返回"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_16_sp" />
+                    <ImageView
+                        android:id="@+id/iv_start_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/bg_start_answer" />
 
-        </RelativeLayout>
+                </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="#0664C0" />
+            </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/shape_project_bg"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="@string/start_answer_tip"
-                android:textColor="@color/text_color"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/iv_start_answer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                android:src="@drawable/bg_start_answer" />
-
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <ImageView
+        android:layout_width="43dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_people2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:src="@drawable/ic_people2" />
+
 </RelativeLayout>
+
 

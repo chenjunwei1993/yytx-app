@@ -6,8 +6,8 @@
 
     <LinearLayout
         android:id="@+id/ll_answer_tip"
-        android:layout_width="330dp"
-        android:layout_height="270dp"
+        android:layout_width="165dp"
+        android:layout_height="135dp"
         android:layout_centerInParent="true"
         android:background="@drawable/bg_answer_tip"
         android:gravity="center"
@@ -15,37 +15,37 @@
 
         <ImageView
             android:id="@+id/iv_answer_tip"
-            android:layout_width="98dp"
-            android:layout_height="80dp"
+            android:layout_width="49dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_people4" />
 
         <TextView
             android:id="@+id/tv_answer_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:gravity="center"
             android:text="@string/answer_first_tip"
             android:textColor="#333"
-            android:textSize="14sp" />
+            android:textSize="7sp" />
         
         <LinearLayout
-            android:visibility="gone"
+
             android:id="@+id/ll_answer_forest_tip"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_answer_reciver_forest"
-            android:layout_width="160dp"
-            android:layout_height="30dp"
+            android:layout_width="80dp"
+            android:layout_height="15dp"
             android:gravity="center">
 
             <ImageView
                 android:src="@drawable/forest_coin"
-                android:layout_width="12dp"
-                android:layout_height="12dp"/>
+                android:layout_width="6dp"
+                android:layout_height="6dp"/>
 
             <TextView
-                android:layout_marginLeft="5dp"
-                android:textSize="14sp"
+                android:layout_marginLeft="3dp"
+                android:textSize="7sp"
                 android:textColor="@color/white"
                 android:text="@string/receiver_one_coin"
                 android:layout_width="wrap_content"

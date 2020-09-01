@@ -8,15 +8,15 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_width="220dp"
-        android:layout_height="200dp"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
         android:background="@drawable/bg_dialog_dice">
         
         <ImageView
             android:id="@+id/iv_dice"
             android:src="@drawable/ic_dice_one"
-            android:layout_width="140dp"
-            android:layout_height="150dp"/>
+            android:layout_width="70dp"
+            android:layout_height="75dp"/>
 
         <TextView
             android:id="@+id/tv_dice_tip"
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="@string/dice_step"
             android:textColor="#333"
-            android:textSize="14sp" />
+            android:textSize="7sp" />
         
     </LinearLayout>
 

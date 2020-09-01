@@ -22,12 +22,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/iv_pre"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="left"
                     android:layout_weight="1"
                     android:src="@drawable/ic_pre" />
@@ -35,7 +35,7 @@
                 <ImageView
                     android:id="@+id/iv_next"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="15dp"
                     android:layout_weight="1"
                     android:src="@drawable/ic_next" />
             </LinearLayout>
@@ -44,13 +44,13 @@
                 android:id="@+id/ll_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/shape_project_bg"
                 android:orientation="vertical"
-                android:paddingLeft="15dp"
-                android:paddingTop="20dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="20dp"
+                android:paddingLeft="7dp"
+                android:paddingTop="10dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="10dp"
                 android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:lineSpacingExtra="3dp"
                 android:text="集齐拼图，让爸爸妈妈微信联系丫丫兑换礼物哦，丫丫微信号："
                 android:textColor="@color/text_color"
@@ -72,39 +72,39 @@
                 android:id="@+id/ll_gift"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/shape_project_bg"
                 android:orientation="vertical"
-                android:paddingLeft="15dp"
-                android:paddingTop="20dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="20dp"
-                android:visibility="gone">
+                android:paddingLeft="7dp"
+                android:paddingTop="10dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="10dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="10dp"
                     android:gravity="center_vertical">
 
                     <View
-                        android:layout_width="5dp"
+                        android:layout_width="2dp"
                         android:layout_height="match_parent"
                         android:background="#F6AF2A" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="6dp"
                         android:text="兑换列表"
                         android:textColor="#e4451b"
-                        android:textSize="14sp" />
+                        android:textSize="7sp" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_gift"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="5dp" />
             </LinearLayout>
 
         </LinearLayout>

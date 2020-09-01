@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     private UserInfoPresenter userInfoPresenter;
     private FragmentPresenter fragmentPresenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         AudioUtils.getInstance().init(this); //初始化语音对象
         userInfoPresenter = new UserInfoPresenter(this, this);
         fragmentPresenter = new FragmentPresenter(this,this);
+    }
+
+    private void initPosition(){
+
     }
 
     @Override
