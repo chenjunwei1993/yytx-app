@@ -1,86 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srl_fresh"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main1"
-    tools:context=".activity.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_main1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_header"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/bg_header"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UselessParent">
+        android:id="@+id/srl_fresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.dyibing.myapp.view.CircleImageView
-            android:id="@+id/circle_avatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="4dp"
-            android:src="@drawable/default_head"
-            app:civ_border_color="#05C2BE"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_header"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UselessParent">
+
+            <com.dyibing.myapp.view.CircleImageView
+                android:id="@+id/circle_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/default_head"
+                app:civ_border_color="#05C2BE"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="#954207"
-            android:textSize="@dimen/text_16_sp"
-            app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
-            app:layout_constraintTop_toTopOf="@+id/circle_avatar" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#954207"
+                android:textSize="@dimen/text_16_sp"
+                app:layout_constraintLeft_toRightOf="@+id/circle_avatar"
+                app:layout_constraintTop_toTopOf="@+id/circle_avatar" />
 
-        <TextView
-            android:id="@+id/tv_forest_coin_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/circle_avatar"
-            android:layout_marginStart="10dp"
-            android:drawableStart="@drawable/forest_coin"
-            android:drawablePadding="5dp"
-            android:textColor="#954207"
-            android:textSize="@dimen/text_16_sp"
-            app:layout_constraintBottom_toBottomOf="@+id/circle_avatar"
-            app:layout_constraintLeft_toRightOf="@+id/circle_avatar" />
+            <TextView
+                android:id="@+id/tv_forest_coin_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/circle_avatar"
+                android:layout_marginStart="10dp"
+                android:drawableStart="@drawable/forest_coin"
+                android:drawablePadding="5dp"
+                android:textColor="#954207"
+                android:textSize="@dimen/text_16_sp"
+                app:layout_constraintBottom_toBottomOf="@+id/circle_avatar"
+                app:layout_constraintLeft_toRightOf="@+id/circle_avatar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_gold"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_gold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_header" />
+
+        <ImageView
+            android:id="@+id/iv_fragment"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_fragment"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_gold" />
+
+        <ImageView
+            android:id="@+id/iv_dice"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_dice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_gold"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_gold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_header" />
-
-    <ImageView
-        android:id="@+id/iv_fragment"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_fragment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_gold" />
-
-    <ImageView
-        android:id="@+id/iv_dice"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_dice"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>

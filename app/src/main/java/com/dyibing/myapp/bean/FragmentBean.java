@@ -5,6 +5,7 @@ public class FragmentBean {
     private int userFragmentId;
     private String fragmentId;
     private int fragmentCount;
+    private int fragmentSort;
 
     public String getFragmentUrl() {
         return fragmentUrl;
@@ -36,5 +37,13 @@ public class FragmentBean {
 
     public void setFragmentCount(int fragmentCount) {
         this.fragmentCount = fragmentCount;
+    }
+
+    public int getFragmentSort() {
+        return fragmentSort;
+    }
+
+    public void setFragmentSort(int fragmentSort) {
+        this.fragmentSort = fragmentSort;
     }
 }

@@ -25,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -54,19 +55,25 @@ public class FragmentAdapter extends RecyclerView.Adapter {
         lp.width = imageWidth;
         lp.height = imageWidth;
         recyclerHolder.rlFragmentItem.setLayoutParams(lp);
-
-        Utils.setText(String.valueOf(fragmentBean.getFragmentCount()), recyclerHolder.tvFragmentCount);
+        if (fragmentBean.getFragmentCount() > 0) {
+            recyclerHolder.tvFragmentCount.setVisibility(View.VISIBLE);
+            Utils.setText(String.valueOf(fragmentBean.getFragmentCount()), recyclerHolder.tvFragmentCount);
+        } else {
+            recyclerHolder.tvFragmentCount.setVisibility(View.GONE);
+        }
         if (!TextUtils.isEmpty(fragmentBean.getFragmentUrl())) {
             Glide.with(mContext).load(fragmentBean.getFragmentUrl()).into(recyclerHolder.ivFragmentItem);
         }
         holder.itemView.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
-                Intent intent = new Intent(mContext, ExChangeActivity.class);
-                intent.putExtra(Constant.FRAGMENT_COUNT, fragmentBean.getFragmentCount());
-                intent.putExtra(Constant.USER_FRAGMENT_ID, fragmentBean.getUserFragmentId());
-                intent.putExtra(Constant.FRAGMENT_URL, fragmentBean.getFragmentUrl());
-                mContext.startActivity(intent);
+                if(fragmentBean.getFragmentCount() > 0){
+                    Intent intent = new Intent(mContext, ExChangeActivity.class);
+                    intent.putExtra(Constant.FRAGMENT_COUNT, fragmentBean.getFragmentCount());
+                    intent.putExtra(Constant.USER_FRAGMENT_ID, fragmentBean.getUserFragmentId());
+                    intent.putExtra(Constant.FRAGMENT_URL, fragmentBean.getFragmentUrl());
+                    mContext.startActivity(intent);
+                }
             }
         });
     }

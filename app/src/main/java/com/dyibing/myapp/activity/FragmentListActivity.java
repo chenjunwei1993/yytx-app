@@ -28,6 +28,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -85,13 +89,13 @@ public class FragmentListActivity extends AppCompatActivity implements UserInfoV
         fragmentPresenter.getFragmentList(String.valueOf(pageNo));
     }
 
-    @OnClick({R.id.circle_avatar, R.id.iv_back, R.id.iv_pre, R.id.iv_next})
+    @OnClick({R.id.circle_avatar, R.id.ll_back, R.id.iv_pre, R.id.iv_next})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.circle_avatar:
                 startActivity(new Intent(this, UserCenterActivity.class));
                 break;
-            case R.id.iv_back:
+            case R.id.ll_back:
                 finish();
                 break;
             case R.id.iv_pre:

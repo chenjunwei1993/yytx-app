@@ -1,0 +1,91 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.dyibing.myapp.view.CircleImageView
+            android:id="@+id/circle_avatar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/default_head"
+            app:civ_border_color="#05C2BE"
+            app:civ_border_width="2dp" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/circle_avatar"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/circle_avatar"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_16_sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/circle_avatar"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:layout_toEndOf="@+id/circle_avatar"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:src="@drawable/forest_coin" />
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:id="@+id/tv_forest_coin_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_16_sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:background="@drawable/shape_button3_bg"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="20dp">
+
+            <ImageView
+                android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:includeFontPadding="false"
+                android:text="返回"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_16_sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#0664C0" />
+</LinearLayout>

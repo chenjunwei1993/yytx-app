@@ -84,10 +84,10 @@ public class ExChangeActivity extends AppCompatActivity implements UserInfoView,
         });
     }
 
-    @OnClick({R.id.iv_forest_coin, R.id.iv_back})
+    @OnClick({R.id.iv_forest_coin, R.id.ll_back})
     public void onclick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
+            case R.id.ll_back:
                 finish();
                 break;
             case R.id.iv_forest_coin:

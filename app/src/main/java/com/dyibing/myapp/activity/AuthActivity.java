@@ -25,6 +25,7 @@ import com.dyibing.myapp.mvp.presenter.LoginPresenter;
 import com.dyibing.myapp.mvp.presenter.WXAuthPresenter;
 import com.dyibing.myapp.mvp.view.LoginView;
 import com.dyibing.myapp.mvp.view.WXAuthView;
+import com.dyibing.myapp.utils.tts.AudioUtils;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.diffdev.DiffDevOAuthFactory;
 import com.tencent.mm.opensdk.diffdev.IDiffDevOAuth;
@@ -66,6 +67,7 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
         loginPresenter = new LoginPresenter(this, this);
         wxAuthPresenter = new WXAuthPresenter(this, this);
         wxAuthPresenter.getWXTokenBean();
+        AudioUtils.getInstance().speakText(getString(R.string.scan_login));
     }
 
     @OnClick({R.id.tv_refresh})

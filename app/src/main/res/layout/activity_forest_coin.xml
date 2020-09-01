@@ -8,20 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@drawable/four" />
-
+        android:src="@drawable/four"/>
 
     <Button
         android:id="@+id/btn_getslb"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="60dp"
+        android:layout_height="16dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_bg"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
+        android:gravity="center"
         android:text="领取1个森林币"
+        android:textSize="6sp"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
