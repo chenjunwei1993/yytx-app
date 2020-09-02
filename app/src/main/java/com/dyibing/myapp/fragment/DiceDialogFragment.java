@@ -14,6 +14,15 @@ import java.util.Random;
 import java.util.logging.Handler;
 
 public class DiceDialogFragment extends BaseDialogFragment {
+    public interface OnDiceStepListener {
+        void setOnDiceStepListener(int stepCount);
+    }
+
+    private OnDiceStepListener onDiceStepListener;
+
+    public void setOnDiceStepListener(OnDiceStepListener onDiceStepListener) {
+        this.onDiceStepListener = onDiceStepListener;
+    }
 
     @Override
     protected View getContentView() {
@@ -39,6 +48,9 @@ public class DiceDialogFragment extends BaseDialogFragment {
 
     private void setDiceView(ImageView iv_dice, TextView tv_dice_tip) {
         int random = new Random().nextInt(6);
+        if (null != onDiceStepListener) {
+            onDiceStepListener.setOnDiceStepListener(random + 1);
+        }
         switch (random) {
             case 0:
                 iv_dice.setImageResource(R.drawable.ic_dice_one);

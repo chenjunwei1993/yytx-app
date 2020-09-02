@@ -46,8 +46,8 @@ public class StartAnswerDialogFragment extends BaseDialogFragment {
         View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_fragment_start_answer, null);
         LinearLayout ll_answer_tip = view.findViewById(R.id.ll_answer_tip);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) ll_answer_tip.getLayoutParams();
-        lp.width = (int) (ScreenUtils.getScreenWidth() * 0.9);
-        lp.height = (int) (ScreenUtils.getScreenWidth() * 0.9 * 0.8);
+        lp.width = (int) (ScreenUtils.getScreenWidth() * 0.8);
+        lp.height = (int) (ScreenUtils.getScreenWidth() * 0.8 * 0.8);
         ll_answer_tip.setLayoutParams(lp);
 
         TextView tv_answer_tip = view.findViewById(R.id.tv_answer_tip);

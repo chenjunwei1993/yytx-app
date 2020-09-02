@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">丫丫超人养成</string>
 
@@ -23,7 +24,7 @@
     <string name="edit_user_tip">给自己取个名字吧～\n再告诉我你的年级\n接下来，探险开始咯！</string>
     <string name="end_answer_tip">哇，好棒！\n收获了%1$s个森林币\n你超过了80%%同年级的小伙伴</string>
     <string name="answer_first_tip">选错咯\n让我们再试一次\n认真想一想哦</string>
-    <string name="answer_second_error_tip">好可惜，正确答案是：\n%1$s看样子你已经学会了这一题，有进步了一点哦</string>
+    <string name="answer_second_error_tip">好可惜，正确答案是：\n%1$s</string>
     <string name="answer_second_ok_tip">哈，答对了！\n我就说过，这一题你一定会的</string>
     <string name="answer_forest">本次答题可获得森林币</string>
     <string name="end_answer">结束答题</string>
@@ -31,9 +32,8 @@
     <string name="no_user_grade_tip">嘿，作为好朋友，你要告诉丫丫你的年级哦</string>
     <string name="receiver_forest_coin">领取%1$s个森林币</string>
     <string name="exchange_total">回收总价：%1$s</string>
-    
-    <string name="dice_step">前进%1$s步</string>
 
+    <string name="dice_step">前进%1$s步</string>
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>
     <string name="warning_tip">森林币不足\n快去答题累积森林币吧</string>

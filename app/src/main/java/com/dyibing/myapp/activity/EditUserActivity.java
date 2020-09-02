@@ -107,7 +107,7 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {
                         Utils.setText(Utils.getGradeList().get(options1), etUserGrade);
                     }
-                }).build();
+                }).setSubCalSize(8).setContentTextSize(8).build();
 
                 pvUserGrade.setPicker(Utils.getGradeList());
                 pvUserGrade.show();

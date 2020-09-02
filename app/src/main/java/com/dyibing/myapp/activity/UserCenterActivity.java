@@ -21,8 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,12 +81,10 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     TextView etBirthday;
     @BindView(R.id.et_user_grade)
     TextView etUserGrade;
-    @BindView(R.id.rb_man)
-    RadioButton rbMan;
-    @BindView(R.id.rb_woman)
-    RadioButton rbWoman;
-    @BindView(R.id.rg_gender)
-    RadioGroup rgGender;
+    @BindView(R.id.iv_man)
+    ImageView ivMan;
+    @BindView(R.id.iv_woman)
+    ImageView ivWoman;
     @BindView(R.id.et_like)
     EditText etLike;
     @BindView(R.id.et_like_gift)
@@ -113,6 +109,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     private UserCenterPresenter userCenterPresenter;
     private PhotoPopupWindow mPhotoPopupWindow;
     private UserInfoPresenter userInfoPresenter;
+    private String userSex;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,11 +128,21 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
 
     Gson gson = new Gson();
 
-    @OnClick({R.id.circle_avatar, R.id.ll_back, R.id.rl_birthday, R.id.rl_user_grade, R.id.iv_save})
+    @OnClick({R.id.circle_avatar, R.id.ll_back, R.id.rl_birthday, R.id.rl_user_grade, R.id.iv_save, R.id.ll_man, R.id.ll_woman})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.ll_back:
                 finish();
+                break;
+            case R.id.ll_woman:
+                ivWoman.setImageResource(R.drawable.ic_selected);
+                ivMan.setImageResource(R.drawable.ic_unselect);
+                userSex = "F";
+                break;
+            case R.id.ll_man:
+                ivWoman.setImageResource(R.drawable.ic_unselect);
+                ivMan.setImageResource(R.drawable.ic_selected);
+                userSex = "M";
                 break;
             case R.id.rl_birthday:
                 //时间选择器
@@ -145,7 +152,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
                         String time = DateUtils.convertToString(DateUtils.DATE_FORMAT, date);
                         Utils.setText(time, etBirthday);
                     }
-                }).build();
+                }).setSubCalSize(8).setContentTextSize(8).build();
                 pvTime.show();
                 break;
             case R.id.rl_user_grade:
@@ -154,7 +161,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {
                         Utils.setText(Utils.getGradeList().get(options1), etUserGrade);
                     }
-                }).build();
+                }).setSubCalSize(8).setContentTextSize(8).build();
 
                 pvUserGrade.setPicker(Utils.getGradeList());
                 pvUserGrade.show();
@@ -222,20 +229,12 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         String nickName = etUsername.getText().toString().trim();
         String birthday = etBirthday.getText().toString().trim();
         String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
-        String userSex = rgGender.getCheckedRadioButtonId() == R.id.rb_man ? "M" : "F";
+        String userSex = this.userSex;
         String userHobby = etLike.getText().toString().trim();
         String likeGift = etLikeGift.getText().toString().trim();
         String likeCartoon = etLikeCartoon.getText().toString().trim();
         String likeIdol = etIdol.getText().toString().trim();
         String likeGame = etLikeGame.getText().toString().trim();
-        if (TextUtils.isEmpty(nickName)) {
-            SingleToast.showMsg("请输入昵称！");
-            return;
-        }
-        if (TextUtils.isEmpty(birthday) || TextUtils.equals("点击选择", birthday)) {
-            SingleToast.showMsg("请选择出生日期！");
-            return;
-        }
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
             SingleToast.showMsg("请选择年级！");
             AudioUtils.getInstance().speakText(getString(R.string.no_user_grade_tip));
@@ -572,10 +571,13 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
             Utils.setText(strBirthday, etBirthday);
         }
         if ("M".equals(userInfoBean.getUserSex())) {
-            rbMan.setChecked(true);
+            ivMan.setImageResource(R.drawable.ic_selected);
+            ivWoman.setImageResource(R.drawable.ic_unselect);
         } else {
-            rbWoman.setChecked(true);
+            ivMan.setImageResource(R.drawable.ic_unselect);
+            ivWoman.setImageResource(R.drawable.ic_selected);
         }
+        this.userSex = userInfoBean.getUserSex();
         if (!TextUtils.isEmpty(userInfoBean.getUserGrade())) {
             Utils.setText(Utils.getGrade(userInfoBean.getUserGrade()), etUserGrade);
         }
