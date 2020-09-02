@@ -77,8 +77,6 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
     TextView tvName;
     @BindView(R.id.tv_forest_coin_count)
     TextView tvForestCoinCount;
-    @BindView(R.id.iv_back)
-    TextView ivBack;
     @BindView(R.id.et_username)
     EditText etUsername;
     @BindView(R.id.et_birthday)
@@ -133,10 +131,10 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
 
     Gson gson = new Gson();
 
-    @OnClick({R.id.circle_avatar, R.id.iv_back, R.id.rl_birthday, R.id.rl_user_grade, R.id.iv_save})
+    @OnClick({R.id.circle_avatar, R.id.ll_back, R.id.rl_birthday, R.id.rl_user_grade, R.id.iv_save})
     public void onclick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
+            case R.id.ll_back:
                 finish();
                 break;
             case R.id.rl_birthday:
