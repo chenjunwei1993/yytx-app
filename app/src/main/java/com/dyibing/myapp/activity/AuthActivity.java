@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -133,7 +134,8 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
             LogUtils.dTag("OAuthListener", authCode);
             if (oAuthErrCode.getCode() == 0) {
                 HashMap<String, Object> paramsMap = new HashMap<>();
-                paramsMap.put("code", authCode);
+//                paramsMap.put("code", authCode);
+                paramsMap.put("code", DeviceUtils.getMacAddress());
                 String strEntity = new Gson().toJson(paramsMap);
                 RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
                 loginPresenter.login(body);

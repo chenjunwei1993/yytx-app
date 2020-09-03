@@ -36,10 +36,13 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
+import com.dyibing.myapp.bean.GameBean;
 import com.dyibing.myapp.bean.UploadResult;
 import com.dyibing.myapp.common.Constant;
 import com.dyibing.myapp.mvp.presenter.UserCenterPresenter;
+import com.dyibing.myapp.mvp.presenter.UserGamePresenter;
 import com.dyibing.myapp.mvp.view.UserCenterView;
+import com.dyibing.myapp.mvp.view.UserGameView;
 import com.dyibing.myapp.net.HttpResult;
 import com.dyibing.myapp.utils.SingleToast;
 import com.dyibing.myapp.utils.Utils;
@@ -59,7 +62,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class EditUserActivity extends AppCompatActivity implements UserCenterView {
+public class EditUserActivity extends AppCompatActivity implements UserCenterView, UserGameView {
     @BindView(R.id.et_username)
     EditText etUsername;
     @BindView(R.id.tv_user_id_show)
@@ -79,9 +82,11 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
     private static final String IMAGE_FILE_NAME = "icon.jpg";
     private String mImageUri;
     private UserCenterPresenter userCenterPresenter;
+    private UserGamePresenter userGamePresenter;
     private PhotoPopupWindow mPhotoPopupWindow;
     private String receiveForestCoinStatus;
     private String avatarUrl;
+    private String userGameId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +94,8 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
         setContentView(R.layout.activity_edit_user);
         receiveForestCoinStatus = getIntent().getStringExtra(Constant.RECEIVE_FOREST_COIN_STATUS);
         userCenterPresenter = new UserCenterPresenter(this, this);
+        userGamePresenter = new UserGamePresenter(this, this);
+        userGamePresenter.getGameUserId();
         setDataToView();
     }
 
@@ -173,6 +180,10 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
      * 保存用户信息
      */
     private void saveData() {
+        if (!TextUtils.isEmpty(userGameId)) {
+            SingleToast.showMsg("游戏ID不存在，你检查网络哦！");
+            return;
+        }
         String nickName = etUsername.getText().toString().trim();
         String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
@@ -184,26 +195,15 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
         paramsMap.put("nickName", nickName);
         paramsMap.put("userGrade", userGrade);
         paramsMap.put("avatarUrl", avatarUrl);
+        paramsMap.put("userGameId", userGameId);
         String strEntity = new Gson().toJson(paramsMap);
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
-        userCenterPresenter.saveUser(body);
+        userGamePresenter.saveGameUser(body);
     }
 
     @Override
     public void onUpdateCurrentDateTask(HttpResult httpResult) {
-        if (httpResult != null) {
-            if ("0000".equals(httpResult.getCode())) {
-                SingleToast.showMsg("保存成功！！");
-                if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
-                    startActivity(new Intent(EditUserActivity.this, ForestCoinActivity.class));
-                } else {
-                    startActivity(new Intent(EditUserActivity.this, MainActivity.class));
-                }
-                finish();
-            } else {
-                SingleToast.showMsg(httpResult.getMsg());
-            }
-        }
+
     }
 
     @Override
@@ -487,5 +487,29 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
     protected void onDestroy() {
         super.onDestroy();
         AudioUtils.getInstance().stopSpeaking();
+    }
+
+    @Override
+    public void getGameUserId(GameBean gameBean) {
+        if (!TextUtils.isEmpty(gameBean.getUserGameId())) {
+            userGameId = gameBean.getUserGameId();
+        }
+    }
+
+    @Override
+    public void saveGameUser(HttpResult httpResult) {
+        if (httpResult != null) {
+            if ("0000".equals(httpResult.getCode())) {
+                SingleToast.showMsg("保存成功！！");
+                if (Utils.isReceiveForestCoin(receiveForestCoinStatus)) {
+                    startActivity(new Intent(EditUserActivity.this, ForestCoinActivity.class));
+                } else {
+                    startActivity(new Intent(EditUserActivity.this, MainActivity.class));
+                }
+                finish();
+            } else {
+                SingleToast.showMsg(httpResult.getMsg());
+            }
+        }
     }
 }

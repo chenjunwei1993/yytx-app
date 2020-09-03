@@ -37,7 +37,7 @@ public class FragmentAdapter extends RecyclerView.Adapter {
 
     public FragmentAdapter(Context mContext) {
         this.mContext = mContext;
-        imageWidth = (ScreenUtils.getScreenWidth() - SizeUtils.dp2px(70)) / 3;
+        imageWidth = (ScreenUtils.getScreenWidth() - SizeUtils.dp2px(34)) / 3;
     }
 
     @NonNull
@@ -57,9 +57,11 @@ public class FragmentAdapter extends RecyclerView.Adapter {
         lp.height = imageWidth;
         recyclerHolder.rlFragmentItem.setLayoutParams(lp);
         if (fragmentBean.getFragmentCount() > 0) {
+            recyclerHolder.view.setVisibility(View.GONE);
             recyclerHolder.tvFragmentCount.setVisibility(View.VISIBLE);
             Utils.setText(String.valueOf(fragmentBean.getFragmentCount()), recyclerHolder.tvFragmentCount);
         } else {
+            recyclerHolder.view.setVisibility(View.VISIBLE);
             recyclerHolder.tvFragmentCount.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(fragmentBean.getFragmentUrl())) {
@@ -68,14 +70,14 @@ public class FragmentAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
-                if(fragmentBean.getFragmentCount() > 0){
+                if (fragmentBean.getFragmentCount() > 0) {
                     Intent intent = new Intent(mContext, ExChangeActivity.class);
                     intent.putExtra(Constant.FRAGMENT_COUNT, fragmentBean.getFragmentCount());
                     intent.putExtra(Constant.USER_FRAGMENT_ID, fragmentBean.getUserFragmentId());
                     intent.putExtra(Constant.FRAGMENT_URL, fragmentBean.getFragmentUrl());
                     mContext.startActivity(intent);
-                }else{
-                    SingleToast.showMsg("还没有获取相应的碎片哦！");
+                } else {
+                    SingleToast.showMsg("还没有解锁碎片哦！");
                 }
             }
         });
@@ -104,6 +106,8 @@ public class FragmentAdapter extends RecyclerView.Adapter {
         TextView tvFragmentCount;
         @BindView(R.id.rl_fragment_item)
         RelativeLayout rlFragmentItem;
+        @BindView(R.id.view)
+        View view;
 
         private RecyclerHolder(View itemView) {
             super(itemView);

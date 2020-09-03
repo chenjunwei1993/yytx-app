@@ -122,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         positionBeanList.add(getPositionBean(0.5694f, 0.7777f));
         positionBeanList.add(getPositionBean(0.5208f, 0.7013f));
         positionBeanList.add(getPositionBean(0.5236f, 0.6111f));
-        positionBeanList.add(getPositionBean(0.5444f, 0.525f));
+        positionBeanList.add(getPositionBean(0.5444f, 0.525f, true));
         positionBeanList.add(getPositionBean(0.5694f, 0.4444f));
         positionBeanList.add(getPositionBean(0.6111f, 0.3611f));
-        positionBeanList.add(getPositionBean(0.6875f, 0.2958f));
+        positionBeanList.add(getPositionBean(0.6875f, 0.2958f, true));
         positionBeanList.add(getPositionBean(0.7402f, 0.2194f));
         positionBeanList.add(getPositionBean(0.7833f, 0.1416f));
         positionBeanList.add(getPositionBean(0.8055f, 0.0472f));
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         positionBeanList.add(getPositionBean(0.8263f, 0.8361f));
         positionBeanList.add(getPositionBean(0.7305f, 0.7861f));
         positionBeanList.add(getPositionBean(0.6944f, 0.7083f));
-        positionBeanList.add(getPositionBean(0.5972f, 0.6555f));
+        positionBeanList.add(getPositionBean(0.5972f, 0.6555f, true));
         positionBeanList.add(getPositionBean(0.6944f, 0.6013f));
         positionBeanList.add(getPositionBean(0.5972f, 0.55f));
-        positionBeanList.add(getPositionBean(0.5f, 0.5f));
+        positionBeanList.add(getPositionBean(0.5f, 0.5f, true));
         positionBeanList.add(getPositionBean(0.4444f, 0.4305f));
         positionBeanList.add(getPositionBean(0.3861f, 0.3569f));
         positionBeanList.add(getPositionBean(0.3305f, 0.2861f));
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         diceDialogFragment.show(getFragmentManager(), "showAnswerDialogFragment");
         new Handler().postDelayed(() -> {
             diceDialogFragment.dismiss();
-        }, 500);
+        }, 300);
     }
 
     /**
@@ -326,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     public void onUseForestCoin(HttpResult httpResult) {
         if (httpResult != null) {
             if ("0000".equals(httpResult.getCode())) {
+                userInfoPresenter.getUserInfo();
                 showDiceDialogFragment();
             } else {
                 showForestDialogFragment();

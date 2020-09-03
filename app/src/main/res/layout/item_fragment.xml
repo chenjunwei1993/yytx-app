@@ -23,4 +23,10 @@
         android:textSize="6sp"
         android:text="10"
         android:textColor="#333" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ccffffff"/>
 </RelativeLayout>
