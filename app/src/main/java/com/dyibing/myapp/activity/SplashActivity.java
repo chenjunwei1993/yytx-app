@@ -200,6 +200,11 @@ public class SplashActivity extends AppCompatActivity implements ForestCoinView 
         receiveForestCoinStatus = forestCoinBean.getReceiveForestCoinStatus();
     }
 
+    @Override
+    public void onUseForestCoin(HttpResult httpResult) {
+
+    }
+
     class GuideAdapter extends PagerAdapter {
 
         @Override

@@ -81,6 +81,11 @@ public class ForestCoinActivity extends AppCompatActivity implements ForestCoinV
     }
 
     @Override
+    public void onUseForestCoin(HttpResult httpResult) {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         AudioUtils.getInstance().stopSpeaking();

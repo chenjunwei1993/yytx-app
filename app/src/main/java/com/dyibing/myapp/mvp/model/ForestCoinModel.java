@@ -26,4 +26,10 @@ public class ForestCoinModel extends BaseModel {
         return toSubscribe(observable, subscriber);
     }
 
+    public Subscription useForestCoin(RequestBody body, Subscriber subscriber) {
+        Observable<HttpResult> observable = RetrofitHelper
+                .getService(ForestCoinService.class)
+                .useForestCoin(body);
+        return toSubscribe(observable, subscriber);
+    }
 }

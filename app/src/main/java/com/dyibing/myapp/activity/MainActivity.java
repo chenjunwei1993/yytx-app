@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.dyibing.myapp.R;
 import com.dyibing.myapp.bean.DataCenter;
+import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.bean.FragmentBean;
 import com.dyibing.myapp.bean.FragmentResult;
 import com.dyibing.myapp.bean.PositionBean;
@@ -23,28 +24,35 @@ import com.dyibing.myapp.bean.UserInfoBean;
 import com.dyibing.myapp.fragment.DiceDialogFragment;
 import com.dyibing.myapp.fragment.ForestDialogFragment;
 import com.dyibing.myapp.fragment.FragmentDialogFragment;
+import com.dyibing.myapp.mvp.presenter.ForestCoinPresenter;
 import com.dyibing.myapp.mvp.presenter.FragmentPresenter;
 import com.dyibing.myapp.mvp.presenter.UserInfoPresenter;
+import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.mvp.view.FragmentView;
 import com.dyibing.myapp.mvp.view.UserInfoView;
 import com.dyibing.myapp.net.HttpResult;
+import com.dyibing.myapp.utils.SingleToast;
 import com.dyibing.myapp.utils.Utils;
 import com.dyibing.myapp.utils.tts.AudioUtils;
 import com.dyibing.myapp.view.CircleImageView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @Descripttion: 主页
  * @Author: chenjunwei
  * @Date: 2020/8/26
  */
-public class MainActivity extends AppCompatActivity implements UserInfoView, FragmentView {
+public class MainActivity extends AppCompatActivity implements UserInfoView, FragmentView, ForestCoinView {
 
     @BindView(R.id.circle_avatar)
     CircleImageView circleAvatar;
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
 
     private UserInfoPresenter userInfoPresenter;
     private FragmentPresenter fragmentPresenter;
+    private ForestCoinPresenter forestCoinPresenter;
     private List<PositionBean> positionBeanList = new ArrayList<>();
     private int totalStepCount;
     private int firstPicStep = 14;
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         AudioUtils.getInstance().init(this); //初始化语音对象
         userInfoPresenter = new UserInfoPresenter(this, this);
         fragmentPresenter = new FragmentPresenter(this, this);
+        forestCoinPresenter = new ForestCoinPresenter(this, this);
         totalPicStep = firstPicStep + secondPicStep + thirdPicStep;
         initFirstPicPosition();
         initSecondPicPosition();
@@ -183,7 +193,11 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
                 startActivity(new Intent(MainActivity.this, FragmentListActivity.class));
                 break;
             case R.id.iv_dice:
-                showDiceDialogFragment();
+                HashMap<String, Object> paramsMap = new HashMap<>();
+                paramsMap.put("type", "GAME");
+                String strEntity = new Gson().toJson(paramsMap);
+                RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
+                forestCoinPresenter.useForestCoin(body);
                 break;
         }
     }
@@ -296,5 +310,27 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     @Override
     public void fragmentSale(HttpResult httpResult) {
 
+    }
+
+    @Override
+    public void onReceiveForestCoin(HttpResult httpResult) {
+
+    }
+
+    @Override
+    public void onReceiveForestCoinStatus(ForestCoinBean forestCoinBean) {
+
+    }
+
+    @Override
+    public void onUseForestCoin(HttpResult httpResult) {
+        if (httpResult != null) {
+            if ("0000".equals(httpResult.getCode())) {
+                showDiceDialogFragment();
+            } else {
+                showForestDialogFragment();
+//                SingleToast.showMsg(httpResult.getMsg());
+            }
+        }
     }
 }

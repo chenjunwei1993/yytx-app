@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">丫丫超人养成</string>
+    <string name="app_name">丫丫探险</string>
 
     <string name="Network_Connection_timeout">网络连接超时</string>
     <string name="no_network">网络中断，请检查您的网络状态</string>

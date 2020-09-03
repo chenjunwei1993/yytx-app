@@ -28,4 +28,14 @@ public interface ForestCoinService {
     @Headers("Content-Type:application/json")
     @GET("childrenUser/receiveForestCoinStatus")
     Observable<HttpResult<ForestCoinBean>> receiveForestCoinStatus();
+
+    /**
+     * 消耗森林币
+     *
+     * @return
+     */
+    @Headers("Content-Type:application/json")
+    @POST("childrenUser/useForestCoin")
+    Observable<HttpResult> useForestCoin(@Body RequestBody body);
+
 }

@@ -18,6 +18,7 @@ import com.dyibing.myapp.activity.ExChangeActivity;
 import com.dyibing.myapp.bean.FragmentBean;
 import com.dyibing.myapp.common.Constant;
 import com.dyibing.myapp.listener.OnMultiClickListener;
+import com.dyibing.myapp.utils.SingleToast;
 import com.dyibing.myapp.utils.Utils;
 
 import java.util.ArrayList;
@@ -73,6 +74,8 @@ public class FragmentAdapter extends RecyclerView.Adapter {
                     intent.putExtra(Constant.USER_FRAGMENT_ID, fragmentBean.getUserFragmentId());
                     intent.putExtra(Constant.FRAGMENT_URL, fragmentBean.getFragmentUrl());
                     mContext.startActivity(intent);
+                }else{
+                    SingleToast.showMsg("还没有获取相应的碎片哦！");
                 }
             }
         });
