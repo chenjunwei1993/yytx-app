@@ -185,7 +185,9 @@ public class EditUserActivity extends AppCompatActivity implements UserCenterVie
             return;
         }
         String nickName = etUsername.getText().toString().trim();
-        String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
+        String userGradeStr = etUserGrade.getText().toString().trim();
+        userGradeStr = TextUtils.equals("点击选择", userGradeStr) ? "" : userGradeStr;
+        String userGrade = Utils.getRequestGrade(userGradeStr);
         if (TextUtils.isEmpty(userGrade) || TextUtils.equals("点击选择", userGrade)) {
             SingleToast.showMsg("请选择年级！");
             AudioUtils.getInstance().speakText(getString(R.string.no_user_grade_tip));

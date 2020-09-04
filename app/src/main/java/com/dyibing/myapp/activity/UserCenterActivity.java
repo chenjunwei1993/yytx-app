@@ -227,8 +227,13 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
      */
     private void saveData() {
         String nickName = etUsername.getText().toString().trim();
+
         String birthday = etBirthday.getText().toString().trim();
-        String userGrade = Utils.getRequestGrade(etUserGrade.getText().toString().trim());
+        birthday = TextUtils.equals("点击选择", birthday) ? "" : birthday;
+
+        String userGradeStr = etUserGrade.getText().toString().trim();
+        userGradeStr = TextUtils.equals("点击选择", userGradeStr) ? "" : userGradeStr;
+        String userGrade = Utils.getRequestGrade(userGradeStr);
         String userSex = this.userSex;
         String userHobby = etLike.getText().toString().trim();
         String likeGift = etLikeGift.getText().toString().trim();
