@@ -55,7 +55,7 @@ public class ExChangeActivity extends AppCompatActivity implements UserInfoView,
     private int fragmentCount;
     private int userFragmentId;
     private String fragmentUrl;
-    private int fragmentSaleCount;
+    private int fragmentSaleCount = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,9 +134,9 @@ public class ExChangeActivity extends AppCompatActivity implements UserInfoView,
             if ("0000".equals(httpResult.getCode())) {
                 SingleToast.showMsg("兑换成功");
                 finish();
+            }else {
+                SingleToast.showMsg(httpResult.getMsg());
             }
-        } else {
-            SingleToast.showMsg(httpResult.getMsg());
         }
     }
 }

@@ -40,7 +40,7 @@ public class AnswerPresenter extends BasePresenter {
     }
 
     /**
-     * 提交答案
+     * 获取本轮答题获取的森林币个数
      */
     public void queryForestCoinCountByBatchNumber(String batchNumber) {
         Subscription subscription = mModel.queryForestCoinCountByBatchNumber(batchNumber, new ProgressSubscriber(o -> ((AnswerView) mView).queryForestCoinCountByBatchNumber((ForestCoinBean) o), mContext));

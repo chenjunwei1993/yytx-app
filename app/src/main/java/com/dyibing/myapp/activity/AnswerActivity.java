@@ -70,6 +70,8 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
             case R.id.tv_end_answer:
                 if (!TextUtils.isEmpty(batchNumber)) {
                     answerPresenter.queryForestCoinCountByBatchNumber(batchNumber);
+                } else {
+                    finish();
                 }
                 break;
         }
@@ -96,15 +98,20 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
 
     @Override
     public void getQuestionInfo(QuestionBean questionBean) {
-        if (TextUtils.isEmpty(batchNumber)) {
-            //第一次获取batchNumber答题批次号
-            batchNumber = questionBean.getBatchNumber();
+        if (null != questionBean) {
+            if (TextUtils.isEmpty(batchNumber)) {
+                //第一次获取batchNumber答题批次号
+                batchNumber = questionBean.getBatchNumber();
+            }
+            Utils.setText(questionBean.getQuestionContent(), tvQuestionContent);
+            answerAdapter.setData(questionBean.getAnswerList());
+            examLogId = questionBean.getExamLogId();
+            questionIds.add(examLogId);
+            setSpeckContent(questionBean);
+        } else {
+            SingleToast.showMsg("未能获取到题目哦！请充足题目哦！");
         }
-        Utils.setText(questionBean.getQuestionContent(), tvQuestionContent);
-        answerAdapter.setData(questionBean.getAnswerList());
-        examLogId = questionBean.getExamLogId();
-        questionIds.add(examLogId);
-        setSpeckContent(questionBean);
+
     }
 
     private void setSpeckContent(QuestionBean questionBean) {

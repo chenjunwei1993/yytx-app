@@ -31,7 +31,6 @@ import com.dyibing.myapp.mvp.view.ForestCoinView;
 import com.dyibing.myapp.mvp.view.FragmentView;
 import com.dyibing.myapp.mvp.view.UserInfoView;
 import com.dyibing.myapp.net.HttpResult;
-import com.dyibing.myapp.utils.SingleToast;
 import com.dyibing.myapp.utils.Utils;
 import com.dyibing.myapp.utils.tts.AudioUtils;
 import com.dyibing.myapp.view.CircleImageView;
@@ -73,8 +72,15 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     private int firstPicStep = 14;
     private int secondPicStep = 13;
     private int thirdPicStep = 13;
+    private int fourPicStep = 13;
+    private int fifPicStep = 11;
     private int totalPicStep = 27;
-    private int[] mainBg = {R.drawable.bg_main1, R.drawable.bg_main2, R.drawable.bg_main3};
+    private int firstTotalPicStep;
+    private int secondTotalPicStep;
+    private int thirdTotalPicStep;
+    private int fourTotalPicStep;
+    private int fifTotalPicStep;
+    private int[] mainBg = {R.drawable.bg_main1, R.drawable.bg_main2, R.drawable.bg_main3, R.drawable.bg_main4, R.drawable.bg_main5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +95,17 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         userInfoPresenter = new UserInfoPresenter(this, this);
         fragmentPresenter = new FragmentPresenter(this, this);
         forestCoinPresenter = new ForestCoinPresenter(this, this);
-        totalPicStep = firstPicStep + secondPicStep + thirdPicStep;
+        totalPicStep = firstPicStep + secondPicStep + thirdPicStep + fourPicStep + fifPicStep;
+        firstTotalPicStep = firstPicStep;
+        secondTotalPicStep = firstTotalPicStep + secondPicStep;
+        thirdTotalPicStep = secondTotalPicStep + thirdPicStep;
+        fourTotalPicStep = thirdTotalPicStep + fourPicStep;
+        fifTotalPicStep = fourTotalPicStep + fifPicStep;
         initFirstPicPosition();
         initSecondPicPosition();
         initThirdPicPosition();
+        initFourPicPosition();
+        initFifPicPosition();
     }
 
     /**
@@ -145,6 +158,36 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         positionBeanList.add(getPositionBean(0.3861f, 0.3569f));
         positionBeanList.add(getPositionBean(0.3305f, 0.2861f));
         positionBeanList.add(getPositionBean(0.2777f, 0.2111f));
+    }
+
+    private void initFourPicPosition() {
+        positionBeanList.add(getPositionBean(0.4416f, 0.8680f));
+        positionBeanList.add(getPositionBean(0.4652f, 0.7819f));
+        positionBeanList.add(getPositionBean(0.5069f, 0.7083f, true));
+        positionBeanList.add(getPositionBean(0.5694f, 0.6319f));
+        positionBeanList.add(getPositionBean(0.625f, 0.5555f));
+        positionBeanList.add(getPositionBean(0.7194f, 0.5097f));
+        positionBeanList.add(getPositionBean(0.7013f, 0.4236f));
+        positionBeanList.add(getPositionBean(0.7958f, 0.3736f));
+        positionBeanList.add(getPositionBean(0.6972f, 0.3111f, true));
+        positionBeanList.add(getPositionBean(0.7847f, 0.2569f));
+        positionBeanList.add(getPositionBean(0.8708f, 0.1944f));
+        positionBeanList.add(getPositionBean(0.8055f, 0.1347f));
+        positionBeanList.add(getPositionBean(0.7402f, 0.0666f));
+    }
+
+    private void initFifPicPosition() {
+        positionBeanList.add(getPositionBean(0.6791f, 0.9388f));
+        positionBeanList.add(getPositionBean(0.6111f, 0.875f, true));
+        positionBeanList.add(getPositionBean(0.7083f, 0.8194f));
+        positionBeanList.add(getPositionBean(0.6138f, 0.7736f));
+        positionBeanList.add(getPositionBean(0.5166f, 0.725f));
+        positionBeanList.add(getPositionBean(0.4222f, 0.6763f));
+        positionBeanList.add(getPositionBean(0.375f, 0.5972f));
+        positionBeanList.add(getPositionBean(0.3194f, 0.5319f, true));
+        positionBeanList.add(getPositionBean(0.2972f, 0.4472f));
+        positionBeanList.add(getPositionBean(0.2611f, 0.368f));
+        positionBeanList.add(getPositionBean(0.2611f, 0.2777f));
     }
 
     private PositionBean getPositionBean(float radioX, float radioY) {
@@ -239,12 +282,16 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
             totalStepCount += stepCount;
             int step = totalStepCount % totalPicStep;
             //循环切换地图
-            if (step < firstPicStep) {
+            if (step < firstTotalPicStep) {
                 ivMain.setImageResource(mainBg[0]);
-            } else if (step >= firstPicStep && step < firstPicStep + secondPicStep) {
+            } else if (step >= firstTotalPicStep && step < secondTotalPicStep) {
                 ivMain.setImageResource(mainBg[1]);
-            } else if (step >= firstPicStep + secondPicStep && step < firstPicStep + secondPicStep + thirdPicStep) {
+            } else if (step >= secondTotalPicStep && step < thirdTotalPicStep) {
                 ivMain.setImageResource(mainBg[2]);
+            } else if (step >= thirdTotalPicStep && step < fourTotalPicStep) {
+                ivMain.setImageResource(mainBg[3]);
+            } else if (step >= fourTotalPicStep && step < fifTotalPicStep) {
+                ivMain.setImageResource(mainBg[4]);
             }
             setYYPosition(positionBeanList.get(totalStepCount % positionBeanList.size()));
         });
