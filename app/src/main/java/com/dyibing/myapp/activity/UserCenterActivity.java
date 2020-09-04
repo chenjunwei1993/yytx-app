@@ -229,7 +229,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         String nickName = etUsername.getText().toString().trim();
 
         String birthday = etBirthday.getText().toString().trim();
-        birthday = TextUtils.equals("点击选择", birthday) ? "" : birthday;
+        birthday = TextUtils.equals("点击选择", birthday) ? "" : birthday + " 00:00:00";
 
         String userGradeStr = etUserGrade.getText().toString().trim();
         userGradeStr = TextUtils.equals("点击选择", userGradeStr) ? "" : userGradeStr;
@@ -247,7 +247,7 @@ public class UserCenterActivity extends AppCompatActivity implements UserCenterV
         }
         HashMap<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("nickName", nickName);
-        paramsMap.put("birthday", birthday + " 00:00:00");
+        paramsMap.put("birthday", birthday);
         paramsMap.put("userGrade", userGrade);
         paramsMap.put("userSex", userSex);
         paramsMap.put("userHobby", userHobby);
