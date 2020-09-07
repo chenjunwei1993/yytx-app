@@ -73,14 +73,23 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     private int secondPicStep = 13;
     private int thirdPicStep = 13;
     private int fourPicStep = 13;
-    private int fifPicStep = 11;
+    private int fifPicStep = 13;
+    private int sixPicStep = 11;
+    private int sevenPicStep = 14;
+    private int eightPicStep = 14;
+    private int ninePicStep = 10;
     private int totalPicStep = 27;
     private int firstTotalPicStep;
     private int secondTotalPicStep;
     private int thirdTotalPicStep;
     private int fourTotalPicStep;
     private int fifTotalPicStep;
-    private int[] mainBg = {R.drawable.bg_main1, R.drawable.bg_main2, R.drawable.bg_main3, R.drawable.bg_main4, R.drawable.bg_main5};
+    private int sixTotalPicStep;
+    private int sevenTotalPicStep;
+    private int eightTotalPicStep;
+    private int nineTotalPicStep;
+    private int[] mainBg = {R.drawable.bg_main1, R.drawable.bg_main2, R.drawable.bg_main3, R.drawable.bg_main4,
+            R.drawable.bg_main5, R.drawable.bg_main6, R.drawable.bg_main7, R.drawable.bg_main8, R.drawable.bg_main9};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +104,26 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         userInfoPresenter = new UserInfoPresenter(this, this);
         fragmentPresenter = new FragmentPresenter(this, this);
         forestCoinPresenter = new ForestCoinPresenter(this, this);
-        totalPicStep = firstPicStep + secondPicStep + thirdPicStep + fourPicStep + fifPicStep;
+        totalPicStep = firstPicStep + secondPicStep + thirdPicStep + fourPicStep
+                + fifPicStep + sixPicStep + sevenPicStep + eightPicStep + ninePicStep;
         firstTotalPicStep = firstPicStep;
         secondTotalPicStep = firstTotalPicStep + secondPicStep;
         thirdTotalPicStep = secondTotalPicStep + thirdPicStep;
         fourTotalPicStep = thirdTotalPicStep + fourPicStep;
         fifTotalPicStep = fourTotalPicStep + fifPicStep;
+        sixTotalPicStep = fifTotalPicStep + sixPicStep;
+        sevenTotalPicStep = sixTotalPicStep + sevenPicStep;
+        eightTotalPicStep = sevenTotalPicStep + eightPicStep;
+        nineTotalPicStep = eightTotalPicStep + ninePicStep;
         initFirstPicPosition();
         initSecondPicPosition();
         initThirdPicPosition();
         initFourPicPosition();
         initFifPicPosition();
+        initSixPicPosition();
+        initSevenPicPosition();
+        initEightPicPosition();
+        initNinePicPosition();
     }
 
     /**
@@ -177,6 +195,22 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
     }
 
     private void initFifPicPosition() {
+        positionBeanList.add(getPositionBean(0.7847f, 0.9111f));
+        positionBeanList.add(getPositionBean(0.7597f, 0.8263f));
+        positionBeanList.add(getPositionBean(0.6666f, 0.7708f));
+        positionBeanList.add(getPositionBean(0.7680f, 0.7222f));
+        positionBeanList.add(getPositionBean(0.675f, 0.6694f));
+        positionBeanList.add(getPositionBean(0.6333f, 0.5916f));
+        positionBeanList.add(getPositionBean(0.7f, 0.5277f));
+        positionBeanList.add(getPositionBean(0.5833f, 0.4888f, true));
+        positionBeanList.add(getPositionBean(0.5194f, 0.4222f));
+        positionBeanList.add(getPositionBean(0.5888f, 0.3513f));
+        positionBeanList.add(getPositionBean(0.4930f, 0.3027f, true));
+        positionBeanList.add(getPositionBean(0.5888f, 0.25f));
+        positionBeanList.add(getPositionBean(0.6138f, 0.1611f));
+    }
+
+    private void initSixPicPosition() {
         positionBeanList.add(getPositionBean(0.6791f, 0.9388f));
         positionBeanList.add(getPositionBean(0.6111f, 0.875f, true));
         positionBeanList.add(getPositionBean(0.7083f, 0.8194f));
@@ -188,6 +222,53 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
         positionBeanList.add(getPositionBean(0.2972f, 0.4472f));
         positionBeanList.add(getPositionBean(0.2611f, 0.368f));
         positionBeanList.add(getPositionBean(0.2611f, 0.2777f));
+    }
+
+    private void initSevenPicPosition() {
+        positionBeanList.add(getPositionBean(0.5875f, 0.85f));
+        positionBeanList.add(getPositionBean(0.6805f, 0.7958f));
+        positionBeanList.add(getPositionBean(0.5888f, 0.7472f, true));
+        positionBeanList.add(getPositionBean(0.6847f, 0.6875f));
+        positionBeanList.add(getPositionBean(0.7805f, 0.6430f));
+        positionBeanList.add(getPositionBean(0.6805f, 0.5930f));
+        positionBeanList.add(getPositionBean(0.7777f, 0.5388f));
+        positionBeanList.add(getPositionBean(0.8361f, 0.4694f));
+        positionBeanList.add(getPositionBean(0.7722f, 0.4041f));
+        positionBeanList.add(getPositionBean(0.8444f, 0.3361f));
+        positionBeanList.add(getPositionBean(0.75f, 0.2875f));
+        positionBeanList.add(getPositionBean(0.8083f, 0.2166f));
+        positionBeanList.add(getPositionBean(0.7222f, 0.1583f));
+        positionBeanList.add(getPositionBean(0.675f, 0.0833f, true));
+    }
+
+    private void initEightPicPosition() {
+        positionBeanList.add(getPositionBean(0.5458f, 0.9125f, true));
+        positionBeanList.add(getPositionBean(0.5f, 0.8388f));
+        positionBeanList.add(getPositionBean(0.5972f, 0.7888f));
+        positionBeanList.add(getPositionBean(0.6861f, 0.7361f));
+        positionBeanList.add(getPositionBean(0.5930f, 0.6791f));
+        positionBeanList.add(getPositionBean(0.6861f, 0.6263f));
+        positionBeanList.add(getPositionBean(0.5888f, 0.5722f));
+        positionBeanList.add(getPositionBean(0.6888f, 0.5152f, true));
+        positionBeanList.add(getPositionBean(0.7611f, 0.4513f));
+        positionBeanList.add(getPositionBean(0.8527f, 0.3930f));
+        positionBeanList.add(getPositionBean(0.7611f, 0.3375f));
+        positionBeanList.add(getPositionBean(0.8176f, 0.2611f));
+        positionBeanList.add(getPositionBean(0.7208f, 0.2069f));
+        positionBeanList.add(getPositionBean(0.7f, 0.1236f));
+    }
+
+    private void initNinePicPosition() {
+        positionBeanList.add(getPositionBean(0.3472f, 0.9097f, true));
+        positionBeanList.add(getPositionBean(0.3038f, 0.8361f));
+        positionBeanList.add(getPositionBean(0.2638f, 0.7555f));
+        positionBeanList.add(getPositionBean(0.2305f, 0.6763f));
+        positionBeanList.add(getPositionBean(0.3277f, 0.6263f));
+        positionBeanList.add(getPositionBean(0.2236f, 0.5722f, true));
+        positionBeanList.add(getPositionBean(0.3236f, 0.5194f));
+        positionBeanList.add(getPositionBean(0.2236f, 0.4736f));
+        positionBeanList.add(getPositionBean(0.2625f, 0.3930f));
+        positionBeanList.add(getPositionBean(0.3f, 0.3097f));
     }
 
     private PositionBean getPositionBean(float radioX, float radioY) {
@@ -292,13 +373,21 @@ public class MainActivity extends AppCompatActivity implements UserInfoView, Fra
                 ivMain.setImageResource(mainBg[3]);
             } else if (step >= fourTotalPicStep && step < fifTotalPicStep) {
                 ivMain.setImageResource(mainBg[4]);
+            } else if (step >= fifTotalPicStep && step < sixTotalPicStep) {
+                ivMain.setImageResource(mainBg[5]);
+            } else if (step >= sixTotalPicStep && step < sevenTotalPicStep) {
+                ivMain.setImageResource(mainBg[6]);
+            } else if (step >= sevenTotalPicStep && step < eightTotalPicStep) {
+                ivMain.setImageResource(mainBg[7]);
+            } else if (step >= eightTotalPicStep && step < nineTotalPicStep) {
+                ivMain.setImageResource(mainBg[8]);
             }
             setYYPosition(positionBeanList.get(totalStepCount % positionBeanList.size()));
         });
         diceDialogFragment.show(getFragmentManager(), "showAnswerDialogFragment");
         new Handler().postDelayed(() -> {
             diceDialogFragment.dismiss();
-        }, 300);
+        }, 800);
     }
 
     /**

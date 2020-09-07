@@ -45,7 +45,7 @@ public class ForestCoinPresenter extends BasePresenter {
      */
 
     public void useForestCoin(RequestBody body) {
-        Subscription subscription = mModel.useForestCoin(body, new ProgressSubscriber(o -> ((ForestCoinView) mView).onUseForestCoin((HttpResult) o), mContext));
+        Subscription subscription = mModel.useForestCoin(body, new ProgressSubscriber(o -> ((ForestCoinView) mView).onUseForestCoin((HttpResult) o), mContext, false));
         subList.add(subscription);
     }
 }

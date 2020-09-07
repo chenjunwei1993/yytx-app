@@ -135,7 +135,7 @@ public class AuthActivity extends AppCompatActivity implements WXAuthView, Login
             if (oAuthErrCode.getCode() == 0) {
                 HashMap<String, Object> paramsMap = new HashMap<>();
 //                paramsMap.put("code", authCode);
-                paramsMap.put("code", DeviceUtils.getMacAddress());
+                paramsMap.put("code", "0812M9000uoHdK1LW50000BEDs32M904");
                 String strEntity = new Gson().toJson(paramsMap);
                 RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), strEntity);
                 loginPresenter.login(body);
