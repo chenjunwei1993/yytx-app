@@ -18,6 +18,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,8 +42,8 @@ public class CashGiftAdapter extends RecyclerView.Adapter {
         GiftBean giftBean = giftBeans.get(position);
         RecyclerHolder recyclerHolder = (RecyclerHolder) holder;
 
-        Utils.setText(giftBean.getGiftName(), recyclerHolder.tvGiftName);
-        Utils.setText(giftBean.getGiftDescribe(), recyclerHolder.tvGiftDescribe);
+        Utils.setText("名称：" + giftBean.getGiftName(), recyclerHolder.tvGiftName);
+        Utils.setText("一句话简介：" + giftBean.getGiftDescribe(), recyclerHolder.tvGiftDescribe);
         if (!TextUtils.isEmpty(giftBean.getGiftUrl())) {
             Glide.with(mContext).load(giftBean.getGiftUrl()).into(recyclerHolder.ivCashGift);
         }

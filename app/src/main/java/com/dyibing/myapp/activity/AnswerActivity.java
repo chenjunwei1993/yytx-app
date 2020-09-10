@@ -53,6 +53,7 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
     private String examLogId;
     private StringBuilder stringBuilder = new StringBuilder();
     private String batchNumber;
+    private String sort = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,8 +118,9 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
     private void setSpeckContent(QuestionBean questionBean) {
         stringBuilder.append(questionBean.getQuestionContent());
         if (null != questionBean.getAnswerList() && questionBean.getAnswerList().size() > 0) {
-            for (String string : questionBean.getAnswerList()) {
-                stringBuilder.append(string);
+            for (int i = 0; i < questionBean.getAnswerList().size(); i++) {
+                String string = questionBean.getAnswerList().get(i);
+                stringBuilder.append(sort.charAt(i % sort.length()) + string + " ");
             }
         }
     }
