@@ -1,12 +1,8 @@
 package com.dyibing.myapp.activity;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dyibing.myapp.R;
@@ -16,7 +12,6 @@ import com.dyibing.myapp.bean.ForestCoinBean;
 import com.dyibing.myapp.bean.QuestionBean;
 import com.dyibing.myapp.bean.SubmitQuestionBean;
 import com.dyibing.myapp.fragment.StartAnswerDialogFragment;
-import com.dyibing.myapp.listener.OnDismissListener;
 import com.dyibing.myapp.mvp.presenter.AnswerPresenter;
 import com.dyibing.myapp.mvp.view.AnswerView;
 import com.dyibing.myapp.net.HttpResult;
@@ -33,7 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -127,7 +121,8 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
 
     @Override
     public void submitQuestion(HttpResult<SubmitQuestionBean> httpResult) {
-        if (httpResult != null) {
+        if (httpResult != null && null != httpResult.getData()) {
+
             if (httpResult.getData().getAnswerNum() == 1) {
                 if ("0000".equals(httpResult.getCode())) {
                     //获取下一道题
@@ -147,7 +142,8 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
 
     @Override
     public void queryForestCoinCountByBatchNumber(ForestCoinBean forestCoinBean) {
-        showAnswerDialogFragment(StartAnswerDialogFragment.END_ANSWER_TYPE, "", String.valueOf(forestCoinBean.getForestCoinCount()));
+        showAnswerDialogFragment(StartAnswerDialogFragment.END_ANSWER_TYPE, "",
+                String.valueOf(forestCoinBean.getForestCoinCount()), forestCoinBean.getUserRank());
     }
 
     private StartAnswerDialogFragment startAnswerDialogFragment;
@@ -164,12 +160,20 @@ public class AnswerActivity extends AppCompatActivity implements AnswerView {
      * 学生所有签到记录信息框
      */
     public void showAnswerDialogFragment(String type, String correctAnswer, String forestCount) {
+        showAnswerDialogFragment(type, correctAnswer, forestCount, "");
+    }
+
+    /**
+     * 学生所有签到记录信息框
+     */
+    public void showAnswerDialogFragment(String type, String correctAnswer, String forestCount, String userRank) {
         if (null != startAnswerDialogFragment) {
             startAnswerDialogFragment.dismiss();
         }
         startAnswerDialogFragment = new StartAnswerDialogFragment();
         startAnswerDialogFragment.setType(type);
         startAnswerDialogFragment.setForestCount(forestCount);
+        startAnswerDialogFragment.setUserRank(userRank);
         startAnswerDialogFragment.setRightAnswer(correctAnswer);
         startAnswerDialogFragment.setOnDismissListener(() -> {
             if (TextUtils.equals(StartAnswerDialogFragment.SECOND_ERROR_TYPE, type)) {

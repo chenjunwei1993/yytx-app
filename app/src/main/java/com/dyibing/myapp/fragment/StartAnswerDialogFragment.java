@@ -22,6 +22,7 @@ public class StartAnswerDialogFragment extends BaseDialogFragment {
     private String type;
     private String rightAnswer;
     private String forestCount = "1";
+    private String userRank;
 
     public void setType(String type) {
         this.type = type;
@@ -33,6 +34,10 @@ public class StartAnswerDialogFragment extends BaseDialogFragment {
 
     public void setForestCount(String forestCount) {
         this.forestCount = forestCount;
+    }
+
+    public void setUserRank(String userRank) {
+        this.userRank = userRank;
     }
 
     private OnDismissListener onDismissListener;
@@ -75,7 +80,7 @@ public class StartAnswerDialogFragment extends BaseDialogFragment {
                 }
             });
         } else if (TextUtils.equals(type, END_ANSWER_TYPE)) {
-            Utils.setText(getString(R.string.end_answer_tip, forestCount), tv_answer_tip);
+            Utils.setText(getString(R.string.end_answer_tip, forestCount, userRank), tv_answer_tip);
             iv_answer_tip.setImageResource(R.drawable.ic_people4);
             ll_answer_forest_tip.setVisibility(View.GONE);
         }

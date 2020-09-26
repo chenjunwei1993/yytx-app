@@ -4,6 +4,7 @@ public class ForestCoinBean {
     private String receiveForestCoinStatus;
     private int forestCoinAmount;
     private int forestCoinCount;
+    private String userRank;
 
     public String getReceiveForestCoinStatus() {
         return receiveForestCoinStatus;
@@ -27,5 +28,13 @@ public class ForestCoinBean {
 
     public void setForestCoinCount(int forestCoinCount) {
         this.forestCoinCount = forestCoinCount;
+    }
+
+    public String getUserRank() {
+        return userRank;
+    }
+
+    public void setUserRank(String userRank) {
+        this.userRank = userRank;
     }
 }
